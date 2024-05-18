@@ -6,3 +6,9 @@ GITHUB
 Branches
     main - main branch for final source code
     dev - development branch, where all the cooking is done.
+
+
+PATH
+ /
+    company
+    register
