@@ -1,8 +1,8 @@
 from django.shortcuts import render, HttpResponse
 
 # Create your views here.
-def index(requst):
-    return HttpResponse("Welcome, to ENGAGE HRMS")
+def index(request):
+    return render(request, 'registration/index.html')
 
 def register(request):
-    return render(request, 'registration/base.html')
+    return render(request, 'registration/register.html')
