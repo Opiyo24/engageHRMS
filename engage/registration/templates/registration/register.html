@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>REGISTRTATION</title>
+    {% load static %}
 </head>
 <body>
     <style>
@@ -18,5 +19,11 @@
         <a href="">Register</a>
 </header>
 <h1>REGISTER HERE</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Submit</button>
+</form>
 </body>
 </html>
