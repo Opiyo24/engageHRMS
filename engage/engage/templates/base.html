@@ -22,24 +22,7 @@
           </ul>
     </header>
     {% block content %}
-    <style>
-        html {
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            background-color: aqua;
-        }
-    </style>
-    <header>
-        <a href="/">Home</a>
-        <a href="">Register</a>
-</header>
-<h1>REGISTER HERE</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
 
-    <button type="submit">Submit</button>
-</form>.</p>
     {% endblock %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -47,5 +30,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
   </body>
 </html>
-
-
