@@ -21,7 +21,7 @@ class CompanyForm(forms.ModelForm):
 class CompanyLoginForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ['companyname']
+        fields = ['companyname', 'password']
 
 class EmployeeForm(forms.ModelForm):
     class Meta:

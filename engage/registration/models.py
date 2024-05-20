@@ -15,6 +15,7 @@ class User(models.Model):
 class Company(models.Model):
     companyid = models.AutoField(primary_key=True)
     companyname = models.CharField(max_length=50)
+    password = models.CharField(max_length=50)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
