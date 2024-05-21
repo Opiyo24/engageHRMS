@@ -17,7 +17,7 @@
     <!-- Title -->
     <title>Entro Launch | Home</title>
     <!-- Favicon -->
-    <link rel="icon" id="favicon" href="./assets/images/favicon.png" type="image/gif" sizes="16x16">
+    <link rel="icon" id="favicon" href="{% static '/assets/images/favicon.png' %}" type="image/gif" sizes="16x16">
     <!-- Google Font Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,14 +27,14 @@
     <!-- Fancybox Image Gallery -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
     <!-- Slider CSS Link -->
-    <link rel="stylesheet" href="./lib/slick-1.8.1/slick/slick.css">
-    <link rel="stylesheet" href="./lib/slick-1.8.1/slick/slick-theme.css">
+    <link rel="stylesheet" href="{% static '/lib/slick-1.8.1/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static '/lib/slick-1.8.1/slick/slick-theme.css' %}">
     <!-- Bootstarp 5 CSS Link -->
-    <link rel="stylesheet" href="./lib/bootstrap-5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static '/lib/bootstrap-5/css/bootstrap.min.css' %}">
     <!-- Main CSS Link -->
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="{% static '/assets/css/style.css' %}">
     <!-- Responsive CSS Link -->
-    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="{% static '/assets/css/responsive.css' %}">
 </head>
 <body>
 
@@ -42,7 +42,7 @@
 
     <!--  Preloader Start  -->
     <div class="preloader">
-        <img src="{% static 'images/preloader-logo.png' %}" alt="Preloader Logo">
+        <img src="{% static 'assets/images/preloader-logo.png' %}" alt="Preloader Logo">
     </div>
     <!--  Preloader End  -->
 
@@ -50,11 +50,10 @@
     <header class="d2c_navbar sticky-top">
         <div class="container">
             <!-- Navbar -->
-            {% load static %}
 <nav class="navbar navbar-expand-lg" id="d2c_main_nav">
     <!-- Logo -->
     <a class="navbar-brand" href="{% url 'registration-index' %}">
-        <img src="{% static 'images/logo.png' %}" class="w-100" alt="Logo">
+        <img src="{% static 'assets/images/logo.png' %}" class="w-100" alt="Logo">
     </a>
     <!-- Logo -->
 
@@ -70,19 +69,6 @@
             <li class="nav-item">
                 <a class="nav-link active" href="{% url 'registration-index' %}">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration-index' %}">About</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration-index' %}">Services</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration-index' %}">Blog</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'registration-index' %}">Contact</a>
-            </li>
-
             <li class="nav-item d-block d-lg-none">
                 <a class="nav-link" href="{% url 'registration-login' %}">Login</a>
             </li>
@@ -117,9 +103,11 @@
     </header>
     <!-- Header End -->
 
-    {% block content %}
+    <div class="container">
+        {% block content %}
 
-    {% endblock %}
+        {% endblock %}
+    </div>
     
 <!-- Footer Section Start -->
 <footer class="d2c_footer_wrapper d2c_entro_launch_bg">
