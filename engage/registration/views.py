@@ -8,7 +8,7 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    return render(request, 'registration/base.html')
+    return render(request, 'registration/index.html', {'title':'Home'})
 
 ############# USER #############
 
@@ -122,3 +122,22 @@ def employee_login(request):
 def employee_logout(request):
     logout(request)
     return redirect('registration-index')
+
+
+def user_profile(request):
+    context = {
+        'title': 'User Profile',
+        }
+    return render(request, 'registration/user_profile.html', context)
+
+def employee_profile(request):
+    context = {
+        'title': 'Employee Profile',
+        }
+    return render(request, 'registration/employee_profile.html', context)
+
+def company_profile(request):
+    context = {
+        'title': 'Company Profile',
+        }
+    return render(request, 'registration/company_profile.html', context)
