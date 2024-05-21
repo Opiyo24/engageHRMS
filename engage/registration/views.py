@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import UserForm, LoginForm, CompanyForm, CompanyLoginForm, EmployeeForm, EmployeeLoginForm
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -8,7 +9,7 @@ from django.contrib import messages
 # Create your views here.
 
 def index(request):
-    return render(request, 'registration/base.html')
+    return render(request, 'registration/index.html', {'title':'Home'})
 
 ############# USER #############
 
@@ -26,24 +27,38 @@ def register(request):
 
 
 def user_login(request):
-    if request.method == 'POST':
+
+    if request.method == "POST":
         form = LoginForm(request.POST)
 
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+            
+            # Check if a user with the provided username exists
+            if not User.objects.filter(username=username).exists():
+                # Display an error message if the username does not exist
+                messages.error(request, 'Invalid Username')
+                return redirect('registration-login')
+                
+            # Authenticate the user with the provided username and password
+            user = authenticate(username=username, password=password)
+                
+            if user is None:
+                # Display an error message if authentication fails (invalid password)
+                messages.error(request, "Invalid Password")
+                return redirect('registration-login')
+            else:
+                # Log in the user and redirect to the home page upon successful login
                 login(request, user)
                 print("The user is authenticated")
-            else:
-                print("The user is not authenticated")
-            form.save()
-            return redirect('registration-index')
+                return redirect('registration-index')
     else:
         form = LoginForm()
+
     context = {'form': form, 'title': 'Login Form'}
     return render(request, 'registration/login.html', context)
+
 
 @login_required
 def user_logout(request):
@@ -53,14 +68,14 @@ def user_logout(request):
 ############# COMPANY #############
 def company(request):
     if request.method == 'POST':
-        form = CompanyForm(request.POST)
+        company_form = CompanyForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+        if company_form.is_valid():
+            company_form.save()
             return redirect('registration-index')
     else:
-        form = CompanyForm()
-    context = {'form': form, 'title': 'Company Registration Form'}
+        company_form = CompanyForm()
+    context = {'form': company_form, 'title': 'Company Registration Form'}
     return render(request, 'registration/company.html', context)
 
 def company_login(request):
@@ -90,14 +105,14 @@ def comapny_logout(request):
 
 def employee(request):
     if request.method == 'POST':
-        form = EmployeeForm(request.POST)
+        employee_form = EmployeeForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+        if employee_form.is_valid():
+            employee_form.save()
             return redirect('registration-index')
     else:
-        form = EmployeeForm()
-    context = {'form': form, 'title': 'Employee Registration Form'}
+        employee_form = EmployeeForm()
+    context = {'form': employee_form, 'title': 'Employee Registration Form'}
     return render(request, 'registration/employee.html', context)
 
 def employee_login(request):
@@ -122,3 +137,22 @@ def employee_login(request):
 def employee_logout(request):
     logout(request)
     return redirect('registration-index')
+
+
+def user_profile(request):
+    context = {
+        'title': 'User Profile',
+        }
+    return render(request, 'registration/user_profile.html', context)
+
+def employee_profile(request):
+    context = {
+        'title': 'Employee Profile',
+        }
+    return render(request, 'registration/employee_profile.html', context)
+
+def company_profile(request):
+    context = {
+        'title': 'Company Profile',
+        }
+    return render(request, 'registration/company_profile.html', context)
