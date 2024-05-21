@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import UserForm, LoginForm, CompanyForm, CompanyLoginForm, EmployeeForm, EmployeeLoginForm
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -26,24 +27,38 @@ def register(request):
 
 
 def user_login(request):
-    if request.method == 'POST':
+
+    if request.method == "POST":
         form = LoginForm(request.POST)
 
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
+            
+            # Check if a user with the provided username exists
+            if not User.objects.filter(username=username).exists():
+                # Display an error message if the username does not exist
+                messages.error(request, 'Invalid Username')
+                return redirect('registration-login')
+                
+            # Authenticate the user with the provided username and password
+            user = authenticate(username=username, password=password)
+                
+            if user is None:
+                # Display an error message if authentication fails (invalid password)
+                messages.error(request, "Invalid Password")
+                return redirect('registration-login')
+            else:
+                # Log in the user and redirect to the home page upon successful login
                 login(request, user)
                 print("The user is authenticated")
-            else:
-                print("The user is not authenticated")
-            form.save()
-            return redirect('registration-index')
+                return redirect('registration-index')
     else:
         form = LoginForm()
+
     context = {'form': form, 'title': 'Login Form'}
     return render(request, 'registration/login.html', context)
+
 
 @login_required
 def user_logout(request):

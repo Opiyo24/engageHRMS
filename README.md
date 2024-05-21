@@ -18,3 +18,5 @@ PATH
         Company
         User
         Employee
+
+    - Sort database query for user authentication

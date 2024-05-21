@@ -1,17 +1,22 @@
 {% extends "registration/base.html" %}
 
 {% block content %}
+
 <h2>{{ title }}</h2>
+
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Login</button>
 </form>
-{% if messages %}
-    <ul>
-        {% for message in messages %}
-            <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+
 {% endblock %}
