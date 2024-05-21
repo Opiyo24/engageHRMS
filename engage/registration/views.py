@@ -53,14 +53,14 @@ def user_logout(request):
 ############# COMPANY #############
 def company(request):
     if request.method == 'POST':
-        form = CompanyForm(request.POST)
+        company_form = CompanyForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+        if company_form.is_valid():
+            company_form.save()
             return redirect('registration-index')
     else:
-        form = CompanyForm()
-    context = {'form': form, 'title': 'Company Registration Form'}
+        company_form = CompanyForm()
+    context = {'form': company_form, 'title': 'Company Registration Form'}
     return render(request, 'registration/company.html', context)
 
 def company_login(request):
@@ -90,14 +90,14 @@ def comapny_logout(request):
 
 def employee(request):
     if request.method == 'POST':
-        form = EmployeeForm(request.POST)
+        employee_form = EmployeeForm(request.POST)
 
-        if form.is_valid():
-            form.save()
+        if employee_form.is_valid():
+            employee_form.save()
             return redirect('registration-index')
     else:
-        form = EmployeeForm()
-    context = {'form': form, 'title': 'Employee Registration Form'}
+        employee_form = EmployeeForm()
+    context = {'form': employee_form, 'title': 'Employee Registration Form'}
     return render(request, 'registration/employee.html', context)
 
 def employee_login(request):

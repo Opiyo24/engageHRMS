@@ -12,3 +12,9 @@ PATH
  /
     company
     register
+
+    ########TODO
+    - Registration drop-down
+        Company
+        User
+        Employee
