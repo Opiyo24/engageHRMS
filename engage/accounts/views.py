@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 #import usercreation form
+from django.http import HttpResponse, HttpRequest
 from .forms import AccountCreationForm, CompanyAccountForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -27,7 +28,7 @@ def company_creation(request):
         company_form = CompanyAccountForm(request.POST, request.FILES)
         if company_form.is_valid():
             company_form.save()
-            return redirect('some_view_name')  # Redirect to a success page or some other view
+            return render(request, 'accounts/logged_in.html')  # Redirect to a success page or some other view
     else:
         company_form = CompanyAccountForm()
     
@@ -50,5 +51,9 @@ def company_creation(request):
     #             return render(request, 'accounts/compoany_signup.html', {'c_form': company_form, 'error': 'That username has already been taken.'})
     #     else:
     #         return render(request, 'accounts/company_signup.html', {'c_form': company_form, 'error': 'Passwords must match'})
+
+
+def logged(request):
+    return render(request, 'accounts/logged_in.html')
 
 

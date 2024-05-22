@@ -14,5 +14,5 @@ class AccountCreationForm(UserCreationForm):
 class CompanyAccountForm(forms.ModelForm):
     class Meta:
         model = Company_account
-        fields = ['company_name', 'company_address', 'company_email', 'company_phone', 'company_website', 'company_logo']
+        fields = ['company_name', 'password1', 'password2']
   
