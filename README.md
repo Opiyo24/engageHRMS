@@ -14,6 +14,8 @@ PATH
     register
 
     ########TODO
+    Default login and logout functions
+    
     - Registration drop-down
         Company
         User

@@ -1,0 +1,32 @@
+{% extends './base.html' %}
+{% block content %}
+
+<div class="container">
+    <div class="card mb-4">
+        <div class="row">
+            <div>
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Sign Up
+                    </h3>
+                    {% if error %}
+    
+                        <h6 class="alert alert-danger mt-5">
+                            {{ error}}
+                        </h6>
+    
+                    {% endif %}
+                    <p class="card-text">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class="btn btn-primary" type="submit">Sign Up</button>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
