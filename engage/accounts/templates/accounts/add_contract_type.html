@@ -2,6 +2,11 @@
 
 {% block content %}
 
-<h2>Need more contract types?</h2>
+<h2>Add Contract Type</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ contract_type_form.as_p }}
+    <button type="submit">ADD</button>
 
 {% endblock %}
