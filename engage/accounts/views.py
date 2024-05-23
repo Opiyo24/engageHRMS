@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 #import usercreation form
 from django.http import HttpResponse, HttpRequest
-from .forms import AccountCreationForm, CompanyAccountForm
+from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -42,13 +43,43 @@ def company_set_up(request):
     return render(request, 'accounts/company.html')
 
 def add_dept(request):
-    return render(request, 'accounts/add_dept.html')
+    context = {}
+    if request.method == 'POST':
+        dept_form = DepartmentForm(request.POST)
+        if dept_form.is_valid():
+            dept_form.save()
+            messages.success(request, 'Department added successfully')
+        else:
+            messages.error(request, 'Department not added')
+    context = {'dept_form': DepartmentForm}
+    return render(request, 'accounts/add_dept.html', context)
 
 def add_position(request):
     return render(request, 'accounts/add_position.html')
 
 def add_contract_type(request):
-    return render(request, 'accounts/add_contract_type.html')
+    context = {}
+    if request.method == 'POST':
+        contract_form = ContractForm(request.POST)
+        if contract_form.is_valid():
+            contract_form.save()
+            messages.success(request, 'Contract type added successfully')
+        else:
+            messages.error(request, 'Contract type not added')
+    context = {'contract_form': ContractForm}   
+    return render(request, 'accounts/add_contract_type.html', context)
+
+def add_title(request):
+    context = {}
+    if request.method == 'POST':
+        title_form = TitleForm(request.POST)
+        if title_form.is_valid():
+            title_form.save()
+            messages.success(request, 'Title added successfully')
+        else:
+            messages.error(request, 'Title not added')
+    context = {'title_form': TitleForm}
+    return render(request, 'accounts/add_title.html', context)
 
 def remove_dept(request):
     return render(request, 'accounts/remove_dept.html')
@@ -60,7 +91,16 @@ def remove_contract_type(request):
     return render(request, 'accounts/remove_contract_type.html')
 
 def add_employee(request):
-    return render(request, 'accounts/add_employee.html')
+    context = {}
+    if request.method == 'POST':
+        emp_form = EmployeeForm(request.POST)
+        if emp_form.is_valid():
+            emp_form.save()
+            messages.success(request, 'Employee added successfully')
+        else:
+            messages.error(request, 'Employee not added')
+    context = {'emp_form': EmployeeForm}
+    return render(request, 'accounts/add_employee.html', context)
 
 def employees(request):
     return render(request, 'accounts/employees.html')

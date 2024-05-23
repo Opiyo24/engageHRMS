@@ -2,11 +2,11 @@
 
 {% block content %}
 
-<h2>Add department</h2>
+<h2>New Title</h2>
 
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    {{ dept_form.as_p }}
+    {{ title_form.as_p }}
     <button type="submit">ADD</button>
 
 {% endblock %}
