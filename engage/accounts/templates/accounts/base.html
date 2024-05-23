@@ -125,46 +125,7 @@
         {% endblock %}
     </div>
     
-<!-- Footer Section Start -->
-<footer class="d2c_footer_wrapper d2c_entro_launch_bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-lg-4 mb-4 mb-lg-0">
-                <a href="{% url 'registration-index' %}"><img src="{% static 'assets/images/footer-logo.png' %}" alt="Footer Logo"></a>
-                <p class="mb-0">Merging efforts.</p>
-            </div>
-            <div class="col-md-6 col-lg-4 mb-2 mb-md-0">
-                <div class="d2c_contact_details">
-                    <h6>Get In Touch</h6>
-                    <div class="d2c_info_wrapper d-flex align-items-center">
-                        <a href="tel:+254700259225" class="d2c_social_icon" aria-label="Phone"><i class="fas fa-phone-alt"></i></a>
-                        <p class="mb-0">+254 700 259 225</p>
-                    </div>
-                    <div class="d2c_info_wrapper d-flex align-items-center">
-                        <a href="mailto:entrolaunch@info.com" class="d2c_social_icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-                        <p class="mb-0">entrolaunch@info.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="d2c_footer_newsletter">
-                    <h6>Social Media</h6>
-                    <ul class="list-group list-group-horizontal">
-                        <li>
-                            <a href="https://twitter.com/DesignToCodes" target="_blank" class="d2c_social_icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/company/designtocodes/" target="_blank" class="d2c_social_icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.instagram.com/designtocodes/" target="_blank" class="d2c_social_icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+ {% include './footer.html' %}
 <!-- Footer Section End -->
 
     
