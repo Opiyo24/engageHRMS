@@ -41,12 +41,49 @@ def company_creation(request):
 def company_set_up(request):
     return render(request, 'accounts/company.html')
 
+def add_dept(request):
+    return render(request, 'accounts/add_dept.html')
+
+def add_position(request):
+    return render(request, 'accounts/add_position.html')
+
+def add_contract_type(request):
+    return render(request, 'accounts/add_contract_type.html')
+
+def remove_dept(request):
+    return render(request, 'accounts/remove_dept.html')
+
+def remove_position(request):
+    return render(request, 'accounts/remove_position.html')
+
+def remove_contract_type(request):
+    return render(request, 'accounts/remove_contract_type.html')
+
+def add_employee(request):
+    return render(request, 'accounts/add_employee.html')
+
+def employees(request):
+    return render(request, 'accounts/employees.html')
+
+def remove_employee(request):
+    return render(request, 'accounts/remove_employee.html')
+
 
 def logged(request):
     return render(request, 'accounts/logged_in.html')
 
 
-def profile(request):
+def dashboard(request):
     return render(request, 'accounts/profile_base.html')
 
+def calendar(request):
+    return render(request, 'accounts/calendar.html')
 
+def add_activity(request):
+    return render(request, 'accounts/add_activity.html')
+
+def activities(request):
+    return render(request, 'accounts/activities.html')
+
+def remove_activity(request):
+    return render(request, 'accounts/remove_activity.html')
