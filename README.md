@@ -14,11 +14,5 @@ PATH
     register
 
     ########TODO
-    Default login and logout functions
+    Decorators (admin)
     
-    - Registration drop-down
-        Company
-        User
-        Employee
-
-    - Sort database query for user authentication

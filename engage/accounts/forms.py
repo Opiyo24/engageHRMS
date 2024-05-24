@@ -16,6 +16,13 @@ class CompanyAccountForm(forms.ModelForm):
         model = Company_account
         fields = ['company_name', 'password1', 'password2']
 
+
+class CompanySetUpForm(forms.ModelForm):
+    class Meta:
+        model = Company_account
+        exclude = ['company_name', 'password1', 'password2']
+        # fields = '__all__'
+
 class CompanyLoginForm(forms.ModelForm):
     class Meta:
         model = Company_account

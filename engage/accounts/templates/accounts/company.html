@@ -2,6 +2,77 @@
 
 {% block content %}
 
-<h2>Welcome { user.username }, pleaase finish setting up { user.company }.</h2>
+    <h2>Company Set Up</h2>
+
+    <h3>Company Profile</h3>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="card p-1">
+            <div class="mb-3 mt-3 ml-1"> 
+                <label>
+                    <pre>Company Name       {{ set_up_form.company_address }}</pre>
+                </label> 
+            </div> 
+            <div class="mb-3 ml-1"> 
+                <label>
+                    <pre>Company Email      {{ set_up_form.company_email }}</pre>
+                </label> 
+            </div> 
+            <div class="mb-3 ml-1"> 
+                <label>
+                    <pre>Company Phone      {{ set_up_form.company_phone }}</pre>
+                </label> 
+            </div>
+            <div class="mb-3 ml-1"> 
+                <label>
+                    <pre>Company Website    {{ set_up_form.company_website }}</pre>
+                </label> 
+            </div>
+            <div class="mb-3 ml-1"> 
+                <label>
+                    <pre>Company Logo       {{ set_up_form.company_logo }}</pre>
+                </label> 
+            </div>
+        </div>
+
+        </form>
+    <h3>Company Departments</h3>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="card p-1">
+            <div class="mb-3 mt-3 ml-1"> 
+                <label>
+                    <pre>Department Name       {{ dept_form.department_name }}</pre>
+                </label> 
+            </div> 
+            <div class="mb-3 ml-1"> 
+                <label>
+                    <pre>Abbreviation          {{ dept_form.department_abbreviation }}</pre>
+                </label> 
+            </div> 
+        </div>
+        </form>
+
+    <h3>Staff Titles</h3>
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="card p-1">
+            <div class="mb-3 mt-3 ml-1"> 
+                <label>
+                    <pre>Title Name       {{ title_form.title_name }}</pre>
+                </label> 
+            </div> 
+            <div class="mb-3 ml-1"> 
+                <label>
+                    <pre>Abbreviation     {{ title_form.title_abbreviation }}</pre>
+                </label> 
+            </div> 
+        </div>
+        </form>
+
+    <button type="submit">Save Profile</button>
 
 {% endblock %}
