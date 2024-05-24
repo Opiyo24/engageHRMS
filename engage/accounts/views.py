@@ -34,7 +34,7 @@ def company_creation(request):
         company_form = CompanyAccountForm(request.POST, request.FILES)
         if company_form.is_valid():
             company_form.save()
-            return render(request, 'accounts/company.html')  # Redirect to a success page or some other view
+            return render(request, 'accounts/set_up_intro.html')  # Redirect to a success page or some other view
     else:
         company_form = CompanyAccountForm()
     
@@ -54,9 +54,13 @@ def company_login(request):
                 return render(request, 'accounts/company_login.html', {'authentication_form': authentication_form, 'error': 'Invalid credentials'})
     return render(request, 'accounts/company_login.html', {'form': CompanyLoginForm})
 
+def company_set_up_intro(request):
+    return render(request, 'accounts/set_up_intro.html')
+
 def company_set_up(request):
+    company = Company_account.objects.get(company_name=request.user.company_name)
     if request.method == 'POST':
-        set_up_form = CompanySetUpForm(request.POST, request.FILES)
+        set_up_form = CompanySetUpForm(request.POST, request.FILES, instance=company)
         dept_form = DepartmentForm(request.POST)
         title_form = TitleForm(request.POST)
         contract_form = ContractForm(request.POST)
@@ -106,7 +110,10 @@ def add_contract_type(request):
             messages.success(request, 'Contract type added successfully')
         else:
             messages.error(request, 'Contract type not added')
-    context = {'contract_form': ContractForm}   
+    else:
+        contract_form = ContractForm()
+
+    context = {'contract_form': contract_form}   
     return render(request, 'accounts/add_contract_type.html', context)
 
 def add_title(request):
