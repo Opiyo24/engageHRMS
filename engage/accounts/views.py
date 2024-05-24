@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib import messages
+from .models import *
 
 # Create your views here.
 def home(request):
@@ -38,6 +39,20 @@ def company_creation(request):
         company_form = CompanyAccountForm()
     
     return render(request, 'accounts/company_signup.html', {'company_form': company_form})
+
+def company_login(request):
+    if request.method == 'POST':
+        authentication_form = CompanyLoginForm(request.POST)
+        if authentication_form.is_valid():
+            company_name = authentication_form.cleaned_data['company_name']
+            password = authentication_form.cleaned_data['password1']
+            user = authenticate(request, company_name=company_name, password=password)
+            if Company_account is not None:
+                login(request, user)
+                return render(request, 'accounts/logged_in.html')
+            else:
+                return render(request, 'accounts/company_login.html', {'authentication_form': authentication_form, 'error': 'Invalid credentials'})
+    return render(request, 'accounts/company_login.html', {'form': CompanyLoginForm})
 
 def company_set_up(request):
     return render(request, 'accounts/company.html')

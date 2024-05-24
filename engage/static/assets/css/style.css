@@ -921,22 +921,22 @@ body .d2c_mobile_view {
 
 /* Footer Section Start */
 .d2c_footer_wrapper {
-    padding: 100px 0px 0px;
+    padding: 30px 0px 0px;
 }
 .d2c_footer_wrapper img {
     max-width: 320px;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
 }
 .d2c_footer_wrapper h6 {
     color: var(--primary_color);
-    margin-bottom: 35px;
+    margin-bottom: 15px;
 }
 .d2c_footer_newsletter ul li {
     margin-right: 20px;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
 }
 .d2c_contact_details {
-    padding: 0px 25px 0px 75px;
+    padding: 0px 15px 0px 55px;
 }
 .d2c_contact_details a {
     margin-right: 18px;
