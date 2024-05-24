@@ -16,6 +16,11 @@ class CompanyAccountForm(forms.ModelForm):
         model = Company_account
         fields = ['company_name', 'password1', 'password2']
 
+class CompanyLoginForm(forms.ModelForm):
+    class Meta:
+        model = Company_account
+        fields = ['company_name', 'password1']
+
 class DepartmentForm(forms.ModelForm):
     class Meta:
         model = Department
