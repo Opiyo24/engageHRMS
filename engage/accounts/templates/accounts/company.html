@@ -1,7 +1,51 @@
+
+
+
 {% extends 'accounts/base.html' %}
 
 {% block content %}
+    <h2>Company Set Up</h2>
 
-<h2>Welcome { user.username }, pleaase finish setting up { user.company }.</h2>
+    <h3>Company Profile</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card p-3 mb-3">
+            <div class="mb-3">
+                <label>Company Address</label>
+                {{ set_up_form.company_address }}
+            </div>
+            <div class="mb-3">
+                <label>Company Email</label>
+                {{ set_up_form.company_email }}
+            </div>
+            <div class="mb-3">
+                <label>Company Phone</label>
+                {{ set_up_form.company_phone }}
+            </div>
+            <div class="mb-3">
+                <label>Company Website</label>
+                {{ set_up_form.company_website }}
+            </div>
+            <div class="mb-3">
+                <label>Company Logo</label>
+                {{ set_up_form.company_logo }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Profile</button>
+    </form>
+
+    <div class="card p-3 mb-3">
+        <a href="{% url 'add_dept' %}">Add Company Departments</a>
+    </div>
+
+
+
+    <div class="card p-3 mb-3">
+        <a href="{% url 'add_title' %}">Add Staff Titles</a>
+    </div>
+
+    <div class="card p-3 mb-3">
+        <a href="{% url 'add_contract_type' %}">Add Contract Types</a>
+    </div>
 
 {% endblock %}

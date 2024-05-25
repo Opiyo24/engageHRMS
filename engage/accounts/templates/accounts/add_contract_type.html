@@ -6,7 +6,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{ contract_type_form.as_p }}
-    <button type="submit">ADD</button>
+    {{ contract_form.as_p }}
+    <button type="submit" class="btn btn-primary">ADD</button>
 
 {% endblock %}

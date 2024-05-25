@@ -3,8 +3,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class User(models.Model):
+    id = models.AutoField(primary_key=True)
+
 class Company_account(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     company_name = models.CharField(max_length=100)
     password1 = models.CharField(max_length=100, default='')
     password2 = models.CharField(max_length=100, default='')
