@@ -3,40 +3,38 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
+# class User(models.Model):
+#     id = models.AutoField(primary_key=True)
 
-class Company_account(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=100)
-    password1 = models.CharField(max_length=100, default='')
-    password2 = models.CharField(max_length=100, default='')
-    company_address = models.CharField(max_length=100)
-    company_email = models.EmailField(max_length=100)
-    company_phone = models.CharField(max_length=100)
-    company_website = models.URLField(max_length=100)
-    company_logo = models.ImageField(upload_to='company_logo', default='default.jpg')
+class Company(models.Model):
+    name = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    email = models.EmailField(max_length=100)
+    phone = models.CharField(max_length=100)
+    website = models.URLField(max_length=100)
+    logo = models.ImageField(upload_to='company_logo', default='default.jpg')
 
     def __str__(self):
-        return f"{self.company_name}"
+        return f"{self.name}"
     
 class Department(models.Model):
-    department_name = models.CharField(max_length=100)
-    department_abbreviation = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100)
+    abbreviation = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return f"{self.department_name}"
+        return f"{self.name}"
     
 class Title(models.Model):
-    title_name = models.CharField(max_length=100)
-    title_abbreviation = models.CharField(max_length=100, null=True)
+    name = models.CharField(max_length=100)
+    abbreviation = models.CharField(max_length=100, null=True)
 
     def __str__(self):
-        return f"{self.title_name}"
+        return f"{self.name}"
     
 class Contract_type(models.Model):
     contract_type = models.CharField(max_length=100)
-    contract_abbreviation = models.CharField(max_length=100, null=True)
+    abbreviation = models.CharField(max_length=100, null=True)
 
     def __str__(self):
         return f"{self.contract_type}"

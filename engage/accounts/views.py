@@ -13,55 +13,58 @@ def home(request):
     context = {}
     return render(request, 'accounts/home.html', context)
 
-def signup(request):
-    if request.method == "GET":
-        return render(request, 'accounts/signup.html', {'form': AccountCreationForm})
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
-                user.save()
-                login(request, user)
-                return redirect('registration-index')
-            except IntegrityError:
-                return render(request, 'accounts/signup.html', {'form': AccountCreationForm, 'error': 'That username has already been taken.'})
-        else:
-            return render(request, 'accounts/signup.html', {'form': AccountCreationForm, 'error': 'Passwords must match'})
+# def signup(request):
+#     if request.method == "GET":
+#         return render(request, 'accounts/signup.html', {'form': AccountCreationForm})
+#     else:
+#         if request.POST['password1'] == request.POST['password2']:
+#             try:
+#                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+#                 user.save()
+#                 login(request, user)
+#                 return redirect('registration-index')
+#             except IntegrityError:
+#                 return render(request, 'accounts/signup.html', {'form': AccountCreationForm, 'error': 'That username has already been taken.'})
+#         else:
+#             return render(request, 'accounts/signup.html', {'form': AccountCreationForm, 'error': 'Passwords must match'})
         
-
+##################### COMPANY #########################
 def company_creation(request):
 
     if request.method == 'POST':
-        company_form = CompanyAccountForm(request.POST)
+        company_form = CompanyRegistrationForm(request.POST)
         if company_form.is_valid():
-            company_form.save()
-            messages.success(request, 'Comoany created!')  # Redirect to a success page or some other view
+            company = company_form.save()
+            user = company_form.save_user()
+            login(request, user)
+            messages.success(request, 'Company created!')
+            return redirect('company_set_up_intro')
     else:
-        company_form = CompanyAccountForm()
+        company_form = CompanyRegistrationForm()
     
     return render(request, 'accounts/company_signup.html', {'company_form': company_form})
 
-def company_login(request):
-    if request.method == 'POST':
-        authentication_form = CompanyLoginForm(request.POST)
-        if authentication_form.is_valid():
-            company_name = authentication_form.cleaned_data['company_name']
-            password = authentication_form.cleaned_data['password1']
-            user = authenticate(request, company_name=company_name, password=password)
-            if Company_account is not None:
-                login(request, user)
-                return render(request, 'accounts/logged_in.html')
-            else:
-                return render(request, 'accounts/company_login.html', {'authentication_form': authentication_form, 'error': 'Invalid credentials'})
-    return render(request, 'accounts/company_login.html', {'form': CompanyLoginForm})
+# def company_login(request):
+#     if request.method == 'POST':
+#         authentication_form = CompanyLoginForm(request.POST)
+#         if authentication_form.is_valid():
+#             company_name = authentication_form.cleaned_data['company_name']
+#             password = authentication_form.cleaned_data['password1']
+#             user = authenticate(request, company_name=company_name, password=password)
+#             if Company is not None:
+#                 login(request, user)
+#                 return render(request, 'accounts/logged_in.html')
+#             else:
+#                 return render(request, 'accounts/company_login.html', {'authentication_form': authentication_form, 'error': 'Invalid credentials'})
+#     return render(request, 'accounts/company_login.html', {'form': CompanyLoginForm})
 
 def company_set_up_intro(request):
     return render(request, 'accounts/set_up_intro.html')
 
 def company_set_up(request):
-    company = Company_account.objects.get(company_name=request.user.company_name)
+    company = request.user.company
     if request.method == 'POST':
-        set_up_form = CompanySetUpForm(request.POST, request.FILES, instance=company)
+        set_up_form = CompanySetUpForm(request.POST, instance=company)
         dept_form = DepartmentForm(request.POST)
         title_form = TitleForm(request.POST)
         contract_form = ContractForm(request.POST)
@@ -87,12 +90,16 @@ def company_set_up(request):
     }
     return render(request, 'accounts/company.html', context)
 
+
+######################## DEPARTMENT ############################
 def add_dept(request):
     context = {}
     if request.method == 'POST':
         dept_form = DepartmentForm(request.POST)
         if dept_form.is_valid():
             dept_form.save()
+            # department.company = request.user.company
+            # department.save()
             messages.success(request, 'Department added successfully')
         else:
             messages.error(request, 'Department not added')
@@ -108,6 +115,8 @@ def add_contract_type(request):
         contract_form = ContractForm(request.POST)
         if contract_form.is_valid():
             contract_form.save()
+            # contract_type = request.user.company
+            # contract_type.save()
             messages.success(request, 'Contract type added successfully')
         else:
             messages.error(request, 'Contract type not added')
@@ -123,6 +132,8 @@ def add_title(request):
         title_form = TitleForm(request.POST)
         if title_form.is_valid():
             title_form.save()
+            # title.company = request.user.company
+            # title.save()
             messages.success(request, 'Title added successfully')
         else:
             messages.error(request, 'Title not added')
