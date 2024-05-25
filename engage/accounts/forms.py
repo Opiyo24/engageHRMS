@@ -35,7 +35,7 @@ class CompanyRegistrationForm(UserCreationForm):
         user.is_staff = True
         if commit:
             user.save()
-            company = Company.objects.create(name=self.cleaned_data['name'], password=self.cleaned_data['password'], owner=user)
+            company = Company.objects.create(name=self.cleaned_data['username'], password=self.cleaned_data['password1'], owner=user)
             company.save()
             user.company = company
             user.save()

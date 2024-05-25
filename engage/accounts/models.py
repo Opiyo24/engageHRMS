@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 class Company(models.Model):
     name = models.CharField(max_length=100)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='company')
     password = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)

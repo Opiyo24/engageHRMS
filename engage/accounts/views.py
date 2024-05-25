@@ -32,15 +32,21 @@ def home(request):
 def company_creation(request):
 
     if request.method == 'POST':
+        print("At begining")
         company_form = CompanyRegistrationForm(request.POST)
         if company_form.is_valid():
-            company = company_form.save()
-            user = company_form.save_user()
+            print("In loop")
+            # company_form.save()
+            print("Copmany created")
+            user = company_form.save()
             login(request, user)
             messages.success(request, 'Company created!')
-            return redirect('company_set_up_intro')
+            return render(request, 'accounts/set_up_intro.html')
+        else:
+            print(company_form.errors)
     else:
         company_form = CompanyRegistrationForm()
+        print("Company not created")
     
     return render(request, 'accounts/company_signup.html', {'company_form': company_form})
 
