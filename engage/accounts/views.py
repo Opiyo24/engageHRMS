@@ -30,11 +30,12 @@ def signup(request):
         
 
 def company_creation(request):
+
     if request.method == 'POST':
-        company_form = CompanyAccountForm(request.POST, request.FILES)
+        company_form = CompanyAccountForm(request.POST)
         if company_form.is_valid():
             company_form.save()
-            return render(request, 'accounts/set_up_intro.html')  # Redirect to a success page or some other view
+            messages.success(request, 'Comoany created!')  # Redirect to a success page or some other view
     else:
         company_form = CompanyAccountForm()
     

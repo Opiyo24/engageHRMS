@@ -2,6 +2,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import *
 
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = '__all__' 
+
 class AccountCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(AccountCreationForm, self).__init__(*args, **kwargs)
@@ -12,6 +17,8 @@ class AccountCreationForm(UserCreationForm):
 
 
 class CompanyAccountForm(forms.ModelForm):
+    user = forms.ModelChoiceField(queryset=User.objects.all(), required=True)
+
     class Meta:
         model = Company_account
         fields = ['company_name', 'password1', 'password2']

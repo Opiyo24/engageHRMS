@@ -1,6 +1,11 @@
 # myapp/admin.py
 from django.contrib import admin
 from .models import *
+from .forms import UserForm
+
+class UserAdmin(admin.ModelAdmin):
+    form = UserForm
+    list_display = ['id']
 
 class CompanyAccountAdmin(admin.ModelAdmin):
     list_display = ('company_name', 'company_email', 'company_phone', 'company_website')
@@ -17,3 +22,4 @@ admin.site.register(Department)
 admin.site.register(Title)
 admin.site.register(Contract_type)
 admin.site.register(Employee)
+admin.site.register(User, UserAdmin)
