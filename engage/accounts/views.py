@@ -71,28 +71,17 @@ def company_set_up(request):
     company = request.user.company
     if request.method == 'POST':
         set_up_form = CompanySetUpForm(request.POST, instance=company)
-        dept_form = DepartmentForm(request.POST)
-        title_form = TitleForm(request.POST)
-        contract_form = ContractForm(request.POST)
-        
-        if set_up_form.is_valid() and dept_form.is_valid() and title_form.is_valid() and contract_form.is_valid():
+
+        if set_up_form.is_valid():
             set_up_form.save()
-            dept_form.save()
-            title_form.save()
-            contract_form.save()
+
             messages.success(request, 'Profile updated successfully')
-            return redirect(request, 'accounts/logged')  # Redirect to a specific view after successful submission
+            return render(request, 'accounts/logged_in.html')  # Redirect to a specific view after successful submission
     else:
         set_up_form = CompanySetUpForm()
-        dept_form = DepartmentForm()
-        title_form = TitleForm()
-        contract_form = ContractForm()
 
     context = {
         'set_up_form': set_up_form,
-        'dept_form': dept_form,
-        'title_form': title_form,
-        'contract_form': contract_form,
     }
     return render(request, 'accounts/company.html', context)
 
