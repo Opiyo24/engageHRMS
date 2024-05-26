@@ -19,14 +19,7 @@
                     <p class="card-text">
                         <form method="POST">
                             {% csrf_token %}
-                            <div class="mb-3"> 
-                                <label>Company Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                                {{ form.company_name }} 
-                            </div> 
-                            <div class="mb-3"> 
-                                <label>Password&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
-                                {{ form.password1 }} 
-                            </div> 
+                            {{ form.as_p }}
                             <button type="submit">Login</button>
                         </form>
                     </p>

@@ -85,6 +85,27 @@ def company_set_up(request):
     }
     return render(request, 'accounts/company.html', context)
 
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                messages.success(request, 'Welcome back!')
+                return redirect('company-logged')
+    else:
+        form = LoginForm()
+    return render(request, 'accounts/company_login.html', {'form': form})
+
+
+def logout_view(request):
+    form = LoginForm()
+    logout(request)
+    return render(request, 'accounts/company_login.html', {'form': form})
+
 
 ######################## DEPARTMENT ############################
 def add_dept(request):
