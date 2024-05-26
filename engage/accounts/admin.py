@@ -1,25 +1,21 @@
 # myapp/admin.py
 from django.contrib import admin
 from .models import *
-from .forms import UserForm
 
-class UserAdmin(admin.ModelAdmin):
-    form = UserForm
-    list_display = ['id']
 
-class CompanyAccountAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'company_email', 'company_phone', 'company_website')
-    search_fields = ('company_name', 'company_email')
-    list_filter = ('company_name',)
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone', 'website')
+    search_fields = ('name', 'email')
+    list_filter = ('name',)
 
 class EmployeeAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'email', 'phone', 'department', 'title', 'contract_type')
     search_fields = ('first_name', 'last_name', 'email')
     list_filter = ('department', 'title', 'contract_type')
 
-admin.site.register(Company_account, CompanyAccountAdmin)
+admin.site.register(Company, CompanyAdmin)
 admin.site.register(Department)
 admin.site.register(Title)
 admin.site.register(Contract_type)
 admin.site.register(Employee)
-admin.site.register(User, UserAdmin)
+

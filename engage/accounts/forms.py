@@ -1,55 +1,73 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django import forms
 from .models import *
 
-class UserForm(forms.ModelForm):
+# class UserForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = '__all__' 
+
+# class AccountCreationForm(UserCreationForm):
+#     def __init__(self, *args, **kwargs):
+#         super(AccountCreationForm, self).__init__(*args, **kwargs)
+
+#         for fieldname in ['username', 'password1', 'password2']:
+#             self.fields[fieldname].help_text = None
+#             self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
+
+
+class CompanyRegistrationForm(UserCreationForm):
+    # name = forms.CharField(max_length=255)
+    # password = forms.CharField(max_length=255)
+
     class Meta:
         model = User
-        fields = '__all__' 
+        fields = ('username', 'email')
+        labels = {
+            'username': 'Company Name',
+            'email': 'Company Email',
+        }
 
-class AccountCreationForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super(AccountCreationForm, self).__init__(*args, **kwargs)
+    def save(self, commit=True):
+        user = super(CompanyRegistrationForm, self).save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.is_staff = True
+        if commit:
+            user.save()
+            company = Company.objects.create(name=self.cleaned_data['username'], password=self.cleaned_data['password1'], owner=user)
+            company.save()
+            user.company = company
+            user.save()
 
-        for fieldname in ['username', 'password1', 'password2']:
-            self.fields[fieldname].help_text = None
-            self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
-
-
-class CompanyAccountForm(forms.ModelForm):
-    user = forms.ModelChoiceField(queryset=User.objects.all(), required=True)
-
-    class Meta:
-        model = Company_account
-        fields = ['company_name', 'password1', 'password2']
+        return user
 
 
 class CompanySetUpForm(forms.ModelForm):
     class Meta:
-        model = Company_account
-        exclude = ['company_name', 'password1', 'password2']
-        # fields = '__all__'
+        model = Company
+        fields = ['address', 'email', 'phone', 'website', 'logo']
 
-class CompanyLoginForm(forms.ModelForm):
-    class Meta:
-        model = Company_account
-        fields = ['company_name', 'password1']
+# class CompanyLoginForm(forms.ModelForm):
+#     class Meta:
+#         model = Company
+#         fields = ['name', 'password']
 
 class DepartmentForm(forms.ModelForm):
     class Meta:
         model = Department
-        fields = ['department_name', 'department_abbreviation']
+        fields = ['name', 'abbreviation']
 
 
 class TitleForm(forms.ModelForm):
     class Meta:
         model = Title
-        fields = ['title_name', 'title_abbreviation']
+        fields = ['name', 'abbreviation']
 
 class ContractForm(forms.ModelForm):
     class Meta:
         model = Contract_type
-        fields = ['contract_type', 'contract_abbreviation']
+        fields = ['contract_type', 'abbreviation']
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
