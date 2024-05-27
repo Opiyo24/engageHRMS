@@ -80,10 +80,32 @@ def company_set_up(request):
     else:
         set_up_form = CompanySetUpForm()
 
+
     context = {
         'set_up_form': set_up_form,
     }
     return render(request, 'accounts/company.html', context)
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+                messages.success(request, 'Welcome back!')
+                return redirect('company-logged')
+    else:
+        form = LoginForm()
+    return render(request, 'accounts/company_login.html', {'form': form})
+
+
+def logout_view(request):
+    form = LoginForm()
+    logout(request)
+    return re(request, 'accounts/company_login.html', {'form': form})
 
 
 ######################## DEPARTMENT ############################
@@ -102,7 +124,18 @@ def add_dept(request):
     return render(request, 'accounts/add_dept.html', context)
 
 def add_position(request):
-    return render(request, 'accounts/add_position.html')
+    context = {}
+    if request.method == 'POST':
+        position_form = PositionForm(request.POST)
+        if position_form.is_valid():
+            position_form.save()
+            # position.company = request.user.company
+            # position.save()
+            messages.success(request, 'Position added successfully')
+        else:
+            messages.error(request, 'Position not added')
+    context = {'position_form': PositionForm}
+    return render(request, 'accounts/add_position.html', context)
 
 def add_contract_type(request):
     context = {}
@@ -135,15 +168,6 @@ def add_title(request):
     context = {'title_form': TitleForm}
     return render(request, 'accounts/add_title.html', context)
 
-def remove_dept(request):
-    return render(request, 'accounts/remove_dept.html')
-
-def remove_position(request):
-    return render(request, 'accounts/remove_position.html')
-
-def remove_contract_type(request):
-    return render(request, 'accounts/remove_contract_type.html')
-
 def add_employee(request):
     context = {}
     if request.method == 'POST':
@@ -155,6 +179,15 @@ def add_employee(request):
             messages.error(request, 'Employee not added')
     context = {'emp_form': EmployeeForm}
     return render(request, 'accounts/add_employee.html', context)
+
+def remove_dept(request):
+    return render(request, 'accounts/remove_dept.html')
+
+def remove_position(request):
+    return render(request, 'accounts/remove_position.html')
+
+def remove_contract_type(request):
+    return render(request, 'accounts/remove_contract_type.html')
 
 def employees(request):
     return render(request, 'accounts/employees.html')

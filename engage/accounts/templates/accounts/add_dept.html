@@ -1,12 +1,32 @@
-{% extends 'accounts/base.html' %}
+{% extends 'accounts/logged_in.html' %}
 
-{% block content %}
+{% block auth_content %}
 
 <h2>Add department</h2>
 
 <form method="post">
-    {% csrf_token %}
-    {{ dept_form.as_p }}
-    <button type="submit" class="btn btn-primary">ADD</button>
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addDeptModal">
+        Add Department
+      </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addDeptModal" tabindex="-1" aria-labelledby="addDeptModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addDeptModalLabel">Add Department</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form id="addDeptForm" method="post">
+                    {% csrf_token %}
+                    {{ dept_form.as_p }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 {% endblock %}

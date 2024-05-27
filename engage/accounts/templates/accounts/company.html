@@ -3,7 +3,8 @@
 
 {% extends 'accounts/base.html' %}
 
-{% block content %}
+<div class="container">
+    {% block content %}
     <h2>Company Set Up</h2>
 
     <h3>Company Profile</h3>
@@ -12,11 +13,15 @@
         <div class="card p-3 mb-3">
             {{ set_up_form.as_p }}
         </div>
-        <button type="submit" class="btn btn-primary">Save Profile</button>
+        <button type="submit" class="btn btn-primary mb-3">Save Profile</button>
     </form>
 
     <div class="card p-3 mb-3">
         <a href="{% url 'add_dept' %}">Add Company Departments</a>
+    </div>
+
+    <div class="card p-3 mb-3">
+        <a href="{% url 'add_position' %}">Add Positions</a>
     </div>
 
 
@@ -30,3 +35,4 @@
     </div>
 
 {% endblock %}
+</div>

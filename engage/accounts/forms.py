@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from django import forms
 from .models import *
 
@@ -41,6 +42,19 @@ class CompanyRegistrationForm(UserCreationForm):
             user.save()
 
         return user
+    
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=255)
+    password = forms.CharField(max_length=255, widget=forms.PasswordInput)
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        user = authenticate(username=username, password=password)
+        if not user:
+            raise forms.ValidationError('Invalid username or password')
+        return self.cleaned_data
 
 
 class CompanySetUpForm(forms.ModelForm):
@@ -68,6 +82,11 @@ class ContractForm(forms.ModelForm):
     class Meta:
         model = Contract_type
         fields = ['contract_type', 'abbreviation']
+
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ['name', 'abbreviation']
 
 class EmployeeForm(forms.ModelForm):
     class Meta:
