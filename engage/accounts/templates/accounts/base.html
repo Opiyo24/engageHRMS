@@ -14,6 +14,7 @@
     <meta name="og:title" content="Best EntroLaunch Onepage Bootstrap Templates - DesignToCodes">
     <meta name="og:description" content="Get ahead of the competition with EntroLaunch Onepage Bootstrap Template designed specifically for entrepreneurs. Start today!">
     <meta property="og:image" content="https://designtocodes.com/wp-content/uploads/2024/04/Best-EntroLaunch-Onepage-Bootstrap-Templates-DesignToCodes.jpg">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Title -->
     {% if title %}
         <title>{{ title }}</title>
@@ -87,6 +88,74 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <!-- Main JS Link -->
     <script src="{% static 'assets/js/main.js' %}"></script>
+
+    <script>
+        $(document).ready(function() {
+          $('#addPositionForm').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: $(this).attr('action'),
+              data: $(this).serialize(),
+              success: function(response) {
+                alert('Position added successfully');
+                $('#addPositionModal').modal('hide');
+              },
+              error: function(response) {
+                alert('Failed to add position');
+              }
+            });
+          });
+    
+          $('#addContractTypeForm').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: $(this).attr('action'),
+              data: $(this).serialize(),
+              success: function(response) {
+                alert('Contract type added successfully');
+                $('#addContractTypeModal').modal('hide');
+              },
+              error: function(response) {
+                alert('Failed to add contract type');
+              }
+            });
+          });
+    
+          $('#addTitleForm').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: $(this).attr('action'),
+              data: $(this).serialize(),
+              success: function(response) {
+                alert('Title added successfully');
+                $('#addTitleModal').modal('hide');
+              },
+              error: function(response) {
+                alert('Failed to add title');
+              }
+            });
+          });
+    
+          $('#addEmployeeForm').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: $(this).attr('action'),
+              data: $(this).serialize(),
+              success: function(response) {
+                alert('Employee added successfully');
+                $('#addEmployeeModal').modal('hide');
+              },
+              error: function(response) {
+                alert('Failed to add employee');
+              }
+            });
+          });
+        });
+      </script>
 
     {% bootstrap_javascript %}
 </body>

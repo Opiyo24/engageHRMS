@@ -83,6 +83,11 @@ class ContractForm(forms.ModelForm):
         model = Contract_type
         fields = ['contract_type', 'abbreviation']
 
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model = Position
+        fields = ['name', 'abbreviation']
+
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee

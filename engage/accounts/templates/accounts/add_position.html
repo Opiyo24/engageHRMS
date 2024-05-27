@@ -1,7 +1,31 @@
-{% extends 'accounts/base.html' %}
+{% extends 'accounts/logged_in.html' %}
 
-{% block content %}
+{% block auth_content %}
 
-<h2>Need more positions?</h2>
+<div class="container">
+
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPositionModal">
+        Add Position
+      </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addPositionModal" tabindex="-1" aria-labelledby="addPositionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addPositionModalLabel">Add Position</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addPositionForm" method="post" action="{% url 'add_position' %}">
+                {% csrf_token %}
+                {{ position_form.as_p }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> 
+</div>
 
 {% endblock %}
