@@ -1,4 +1,5 @@
 {% extends 'accounts/logged_in.html' %}
+{% load crispy_forms_tags %}
 
 {% block auth_content %}
 
@@ -19,7 +20,7 @@
             <div class="modal-body">
               <form id="addPositionForm" method="post" action="{% url 'add_position' %}">
                 {% csrf_token %}
-                {{ position_form.as_p }}
+                {{ position_form|crispy }}
                 <button type="submit" class="btn btn-primary">Submit</button>
               </form>
             </div>

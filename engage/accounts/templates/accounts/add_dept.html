@@ -1,4 +1,5 @@
 {% extends 'accounts/logged_in.html' %}
+{% load crispy_forms_tags %}
 
 {% block auth_content %}
 
@@ -20,7 +21,7 @@
                 <div class="modal-body">
                   <form id="addDeptForm" method="post">
                     {% csrf_token %}
-                    {{ dept_form.as_p }}
+                    {{ dept_form|crispy }}
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
