@@ -186,6 +186,7 @@ def add_title(request):
 
 def add_employee(request):
     context = {}
+    employees = Employee.objects.all()
     if request.method == 'POST':
         emp_form = EmployeeForm(request.POST)
         if emp_form.is_valid():
@@ -193,7 +194,10 @@ def add_employee(request):
             messages.success(request, 'Employee added successfully')
         else:
             messages.error(request, 'Employee not added')
-    context = {'emp_form': EmployeeForm}
+    context = {
+        'emp_form': EmployeeForm,
+        'employees': employees,
+        }
     return render(request, 'accounts/add_employee.html', context)
 
 def remove_dept(request):

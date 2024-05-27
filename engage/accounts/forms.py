@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django import forms
 from .models import *
+import datetime
 
 # class UserForm(forms.ModelForm):
 #     class Meta:
@@ -91,5 +92,9 @@ class PositionForm(forms.ModelForm):
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ['title', 'first_name', 'last_name', 'email', 'phone', 'department', 'position', 'title', 'contract_type', 'start_date', 'end_date', 'salary']
+        fields = ['title', 'first_name', 'last_name', 'email', 'phone', 'address', 'department', 'position', 'title', 'contract_type', 'start_date', 'end_date', 'salary']
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type': 'date', 'max': datetime.date.today().isoformat()}),
+            'end_date': forms.DateInput(attrs={'type': 'date', max: datetime.date.today().isoformat()}),
+        }
   
