@@ -104,7 +104,7 @@ def login_view(request):
 def logout_view(request):
     form = LoginForm()
     logout(request)
-    return render(request, 'accounts/company_login.html', {'form': form})
+    return re(request, 'accounts/company_login.html', {'form': form})
 
 
 ######################## DEPARTMENT ############################

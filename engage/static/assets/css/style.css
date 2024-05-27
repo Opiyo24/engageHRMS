@@ -49,9 +49,11 @@
 
 html {
     scroll-behavior: smooth;
+    min-height: 100vh;
 }
 body {
     overflow-x: hidden;
+    
 }
 section {
     padding: 100px 0px;
@@ -1394,6 +1396,231 @@ body .d2c_mobile_view {
 }
 /* Scroll Button End */
 
+/* SIdebar */
+
+.rounded-circle, .app-sidebar__user-avatar {
+    border-radius: 50% !important;
+  }
+
+@media (min-width: 768px) {
+    .app.sidenav-toggled .app-content {
+      margin-left: 0;
+    }
+    .app.sidenav-toggled .app-sidebar {
+      left: -230px;
+    }
+    .app.sidenav-toggled .app-sidebar__overlay {
+      visibility: hidden;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .app {
+      overflow-x: hidden;
+    }
+    .app .app-sidebar {
+      left: -230px;
+    }
+    .app .app-sidebar__overlay {
+      visibility: hidden;
+    }
+    .app.sidenav-toggled .app-content {
+      margin-left: 0;
+    }
+    .app.sidenav-toggled .app-sidebar {
+      left: 0;
+    }
+    .app.sidenav-toggled .app-sidebar__overlay {
+      visibility: visible;
+    }
+  }
+
+.app-sidebar__toggle {
+    padding: 0 15px;
+    font-family: fontAwesome;
+    color: #fff;
+    line-height: 2.4;
+    -webkit-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+  }
+  
+  @media (max-width: 767px) {
+    .app-sidebar__toggle {
+      -webkit-box-ordinal-group: 0;
+          -ms-flex-order: -1;
+              order: -1;
+    }
+  }
+  
+  .app-sidebar__toggle:before {
+    content: "\f0c9";
+    font-size: 21px;
+  }
+  
+  .app-sidebar__toggle:focus, .app-sidebar__toggle:hover {
+    color: #fff;
+    background-color: #00635a;
+    text-decoration: none;
+  }
+
+.app-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 70px;
+    width: 230px;
+    overflow: auto;
+    z-index: 10;
+    background-color: #222d32;
+    -webkit-box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 8px 17px rgba(0, 0, 0, 0.2);
+    -webkit-transition: left 0.3s ease,
+   width 0.3s ease;
+    -o-transition: left 0.3s ease,
+   width 0.3s ease;
+    transition: left 0.3s ease,
+   width 0.3s ease;
+  }
+  
+  .app-sidebar::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .app-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  @media print {
+    .app-sidebar {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .app-sidebar__overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 9;
+    }
+  }
+  
+  .app-sidebar__user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  .app-sidebar__user-avatar {
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+    margin-right: 15px;
+  }
+  
+  .app-sidebar__user-name {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+  
+  .app-sidebar__user-name,
+  .app-sidebar__user-designation {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
+    margin-bottom: 0;
+  }
+
+@media (min-width: 768px) {
+    .sidebar-mini.sidenav-toggled .app-sidebar__user-name,
+    .sidebar-mini.sidenav-toggled .app-sidebar__user-designation,
+    .sidebar-mini.sidenav-toggled .treeview-indicator {
+      display: none;
+    }
+    .sidebar-mini.sidenav-toggled .app-sidebar__user-avatar {
+      width: 30px;
+      height: 30px;
+    }
+    .sidebar-mini.sidenav-toggled .app-content {
+      margin-left: 50px;
+    }
+    .sidebar-mini.sidenav-toggled .app-sidebar {
+      left: 0;
+      width: 50px;
+      overflow: hidden;
+    }
+    .sidebar-mini.sidenav-toggled .app-sidebar:hover {
+      overflow: visible;
+    }
+    .sidebar-mini.sidenav-toggled .app-menu__item {
+      overflow: hidden;
+    }
+    .sidebar-mini.sidenav-toggled .app-menu__item:hover {
+      overflow: visible;
+    }
+    .sidebar-mini.sidenav-toggled .app-menu__item:hover .app-menu__label {
+      opacity: 1;
+    }
+    .sidebar-mini.sidenav-toggled .app-menu__item:hover + .treeview-menu {
+      visibility: visible;
+    }
+    .sidebar-mini.sidenav-toggled .app-menu__label {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50px;
+      min-width: 180px;
+      padding: 12px 5px 12px 20px;
+      margin-left: -3px;
+      line-height: 1;
+      opacity: 0;
+      background: #0d1214;
+      border-top-right-radius: 4px;
+      border-bottom-right-radius: 4px;
+    }
+    .sidebar-mini.sidenav-toggled .treeview:hover .app-menu__item {
+      overflow: visible;
+      background: #0d1214;
+      border-left-color: #009688;
+      color: #fff;
+    }
+    .sidebar-mini.sidenav-toggled .treeview:hover .app-menu__label {
+      opacity: 1;
+    }
+    .sidebar-mini.sidenav-toggled .treeview:hover .treeview-menu {
+      max-height: 100vh;
+      opacity: 1;
+      visibility: visible;
+      z-index: 10;
+    }
+    .sidebar-mini.sidenav-toggled .treeview .app-menu__label {
+      border-bottom-right-radius: 0;
+    }
+    .sidebar-mini.sidenav-toggled .treeview-menu {
+      position: absolute;
+      left: 50px;
+      min-width: 180px;
+      padding: 12px 0;
+      opacity: 0;
+      border-bottom-right-radius: 4px;
+      z-index: 9;
+      visibility: hidden;
+      -webkit-transition: visibility 0.3s ease;
+      -o-transition: visibility 0.3s ease;
+      transition: visibility 0.3s ease;
+    }
+  }
 
 /* 
     Template Name: {{Best EntroLaunch Onepage Bootstrap Templates - DesignToCodes}}

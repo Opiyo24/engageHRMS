@@ -62,11 +62,11 @@
     </header>
     <!-- Header End -->
 
-    <div class="container">
-        {% block content %}
 
-        {% endblock %}
-    </div>
+    {% block content %}
+
+    {% endblock %}
+
     
  {% include './footer.html' %}
 <!-- Footer Section End -->
@@ -83,6 +83,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <!-- Slider JS Link -->
     <script src="{% static 'lib/slick-1.8.1/slick/slick.min.js' %}"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <!-- Main JS Link -->
     <script src="{% static 'assets/js/main.js' %}"></script>
 
