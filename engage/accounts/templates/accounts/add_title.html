@@ -32,4 +32,26 @@
           </div>
     </div>
 
+<h2>Copmany Titles</h2>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Title</th>
+          <th>Abbreviation</th>
+          <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+      {% for title in titles %}
+      <tr>
+          <td>{{ title.name }}</td>
+          <td>{{ title.abbreviation }}</td>
+          <td>
+              <a href="#" class="btn btn-primary">Edit</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+
 {% endblock %}

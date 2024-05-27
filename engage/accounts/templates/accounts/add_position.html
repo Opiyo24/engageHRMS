@@ -29,4 +29,26 @@
       </div> 
 </div>
 
+<h2>Copmany Positions</h2>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Position</th>
+          <th>Abbreviation</th>
+          <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+      {% for pos in positions %}
+      <tr>
+          <td>{{ pos.name }}</td>
+          <td>{{ pos.abbreviation }}</td>
+          <td>
+              <a href="#" class="btn btn-primary">Edit</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+
 {% endblock %}
