@@ -105,19 +105,19 @@ def login_view(request):
 def logout_view(request):
     form = LoginForm()
     logout(request)
-    return re(request, 'accounts/company_login.html', {'form': form})
+    return render(request, 'accounts/company_login.html', {'form': form})
 
 
 ######################## DEPARTMENT ############################
 def add_dept(request):
     context = {}
-    departments = Department.objects.all()
+    departments = Department.objects.filter(company=request.user.company)
     if request.method == 'POST':
         dept_form = DepartmentForm(request.POST)
         if dept_form.is_valid():
-            dept_form.save()
-            # department.company = request.user.company
-            # department.save()
+            department = dept_form.save(commit=False)
+            department.company = request.user.company
+            department.save()
             messages.success(request, 'Department added successfully')
         else:
             messages.error(request, 'Department not added')
@@ -129,13 +129,13 @@ def add_dept(request):
 
 def add_position(request):
     context = {}
-    positions = Position.objects.all()
+    positions = Position.objects.filter(company=request.user.company)
     if request.method == 'POST':
         position_form = PositionForm(request.POST)
         if position_form.is_valid():
-            position_form.save()
-            # position.company = request.user.company
-            # position.save()
+            position = position_form.save()
+            position.company = request.user.company
+            position.save()
             messages.success(request, 'Position added successfully')
         else:
             messages.error(request, 'Position not added')
@@ -147,13 +147,13 @@ def add_position(request):
 
 def add_contract_type(request):
     context = {}
-    contracts = Contract_type.objects.all()
+    contracts = Contract_type.objects.filter(company=request.user.company)
     if request.method == 'POST':
         contract_form = ContractForm(request.POST)
         if contract_form.is_valid():
-            contract_form.save()
-            # contract_type = request.user.company
-            # contract_type.save()
+            contract_type = contract_form.save()
+            contract_type = request.user.company
+            contract_type.save()
             messages.success(request, 'Contract type added successfully')
         else:
             messages.error(request, 'Contract type not added')
@@ -168,13 +168,13 @@ def add_contract_type(request):
 
 def add_title(request):
     context = {}
-    titles = Title.objects.all()
+    titles = Title.objects.filter(company=request.user.company)
     if request.method == 'POST':
         title_form = TitleForm(request.POST)
         if title_form.is_valid():
-            title_form.save()
-            # title.company = request.user.company
-            # title.save()
+            title = title_form.save()
+            title.company = request.user.company
+            title.save()
             messages.success(request, 'Title added successfully')
         else:
             messages.error(request, 'Title not added')
@@ -186,11 +186,13 @@ def add_title(request):
 
 def add_employee(request):
     context = {}
-    employees = Employee.objects.all()
+    employees = Employee.objects.filter(company=request.user.company)
     if request.method == 'POST':
         emp_form = EmployeeForm(request.POST)
         if emp_form.is_valid():
-            emp_form.save()
+            employee = emp_form.save()
+            employee.company = request.user.company
+            employee.save()
             messages.success(request, 'Employee added successfully')
         else:
             messages.error(request, 'Employee not added')
