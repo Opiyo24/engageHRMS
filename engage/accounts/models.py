@@ -36,7 +36,7 @@ class Title(models.Model):
         return f"{self.name}"
     
 class Contract_type(models.Model):
-    contract_type = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     abbreviation = models.CharField(max_length=100, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 

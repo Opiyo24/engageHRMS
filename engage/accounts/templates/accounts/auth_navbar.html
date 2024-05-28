@@ -8,7 +8,7 @@
       <!-- Navbar -->
 <nav class="navbar navbar-expand-lg" id="d2c_main_nav">
   <!-- Logo -->
-  <a class="navbar-brand" href="#">
+  <a class="navbar-brand" href="{% url 'accounts-home' %}">
       <img src="{% static 'assets/images/logo.png' %}" class="w-100" alt="Logo">
   </a>
   <!-- Logo -->
@@ -23,7 +23,7 @@
   <div class="collapse navbar-collapse js-clone-nav justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav">
           <li class="nav-item">
-              <a class="nav-link active" href="#">Hello, Admin</a>
+              <a class="nav-link active" href="{% url 'accounts-home' %}">Hello, Admin</a>
               </li>
               <li class="nav-item d-block d-lg-none">
                   <a class="nav-link" href="#">Login</a>
@@ -38,7 +38,7 @@
       <div class="d2c_nav_btn d-none d-lg-block">
           <a href="#" class="nav-link d-inline-block m-1">Notifications</a>
           <a href="#" class="nav-link d-inline-block m-1">Settings</a>
-          <a href="{% url 'logout' %}" class="btn m-1">Logout</a>
+          <a href="{% url 'logout_view' %}" class="btn m-1">Logout</a>
       </div>
   </div>
   <!-- Nav Item -->
