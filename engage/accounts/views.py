@@ -50,19 +50,6 @@ def company_creation(request):
     
     return render(request, 'accounts/company_signup.html', {'company_form': company_form})
 
-# def company_login(request):
-#     if request.method == 'POST':
-#         authentication_form = CompanyLoginForm(request.POST)
-#         if authentication_form.is_valid():
-#             company_name = authentication_form.cleaned_data['company_name']
-#             password = authentication_form.cleaned_data['password1']
-#             user = authenticate(request, company_name=company_name, password=password)
-#             if Company is not None:
-#                 login(request, user)
-#                 return render(request, 'accounts/logged_in.html')
-#             else:
-#                 return render(request, 'accounts/company_login.html', {'authentication_form': authentication_form, 'error': 'Invalid credentials'})
-#     return render(request, 'accounts/company_login.html', {'form': CompanyLoginForm})
 
 def company_set_up_intro(request):
     return render(request, 'accounts/set_up_intro.html')
@@ -133,7 +120,7 @@ def add_position(request):
     if request.method == 'POST':
         position_form = PositionForm(request.POST)
         if position_form.is_valid():
-            position = position_form.save()
+            position = position_form.save(commit=False)
             position.company = request.user.company
             position.save()
             messages.success(request, 'Position added successfully')
@@ -151,8 +138,8 @@ def add_contract_type(request):
     if request.method == 'POST':
         contract_form = ContractForm(request.POST)
         if contract_form.is_valid():
-            contract_type = contract_form.save()
-            contract_type = request.user.company
+            contract_type = contract_form.save(commit=False)
+            contract_type.company = request.user.company
             contract_type.save()
             messages.success(request, 'Contract type added successfully')
         else:
@@ -172,7 +159,7 @@ def add_title(request):
     if request.method == 'POST':
         title_form = TitleForm(request.POST)
         if title_form.is_valid():
-            title = title_form.save()
+            title = title_form.save(commit=False)
             title.company = request.user.company
             title.save()
             messages.success(request, 'Title added successfully')
@@ -190,7 +177,7 @@ def add_employee(request):
     if request.method == 'POST':
         emp_form = EmployeeForm(request.POST)
         if emp_form.is_valid():
-            employee = emp_form.save()
+            employee = emp_form.save(commit=False)
             employee.company = request.user.company
             employee.save()
             messages.success(request, 'Employee added successfully')
