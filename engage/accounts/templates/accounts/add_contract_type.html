@@ -1,33 +1,57 @@
 {% extends 'accounts/logged_in.html' %}
+{% load crispy_forms_tags %}
 
 {% block auth_content %}
 
 <h2>Add Contract Type</h2>
 
-    <div class="container">
+  <div class="container">
 
-        <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#addContractTypeModal">
-            Add Contract Type
-          </button>
+      <button type="button" class="btn btn-secondary mb-3" data-bs-toggle="modal" data-bs-target="#addContractTypeModal">
+          Add Contract Type
+        </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="addContractTypeModal" tabindex="-1" aria-labelledby="addContractTypeModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addContractTypeModalLabel">Add Contract Type</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form id="addContractTypeForm" method="post" action="{% url 'add_contract_type' %}">
-                    {% csrf_token %}
-                    {{ contract_form.as_p }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
+      <!-- Modal -->
+      <div class="modal fade" id="addContractTypeModal" tabindex="-1" aria-labelledby="addContractTypeModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="addContractTypeModalLabel">Add Contract Type</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form id="addContractTypeForm" method="post" action="{% url 'add_contract_type' %}">
+                  {% csrf_token %}
+                  {{ contract_form|crispy }}
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
               </div>
             </div>
           </div>
-    </div>
+        </div>
+  </div>
+  
+
+<h2>Contract Types</h2>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Contract Type</th>
+          <th>Abbreviation</th>
+          <th>Actions</th>
+      </tr>
+  </thead>
+  <tbody>
+      {% for contract in contracts %}
+      <tr>
+          <td>{{ contract.name }}</td>
+          <td>{{ contract.abbreviation }}</td>
+          <td>
+              <a href="#" class="btn btn-primary">Edit</a>
+              <a href="#" class="btn btn-danger">Delete</a>
+          </td>
+      </tr>
+      {% endfor %}
+  </tbody>
 
 {% endblock %}

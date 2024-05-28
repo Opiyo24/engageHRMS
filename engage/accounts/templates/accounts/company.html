@@ -1,7 +1,5 @@
-
-
-
 {% extends 'accounts/base.html' %}
+{% load crispy_forms_tags %}
 
 <div class="container">
     {% block content %}
@@ -11,7 +9,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="card p-3 mb-3">
-            {{ set_up_form.as_p }}
+            {{ set_up_form|crispy }}
         </div>
         <button type="submit" class="btn btn-primary mb-3">Save Profile</button>
     </form>
