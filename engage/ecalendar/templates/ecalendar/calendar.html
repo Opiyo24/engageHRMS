@@ -6,10 +6,36 @@ Calendar
 
 {% block content %}
 <div class="clearfix">
-	<a class="btn btn-info left" href="{% url 'calendar' %}?{{ prev_month }}"> Previous Month </a>
-	<a class="btn btn-info right" href="{% url 'calendar' %}?{{ next_month }}"> Next Month </a>
-	<a class="btn btn-info right" href="{% url 'ecalendar:event_new' %}"> New Event </a>
+    <a class="btn btn-info left" href="{% url 'ecalendar:calendar' %}?{{ prev_month }}">Previous Month</a>
+    <a class="btn btn-info right" href="{% url 'ecalendar:calendar' %}?{{ next_month }}">Next Month</a>
+    <button type="button" class="btn btn-info right" data-bs-toggle="modal" data-bs-target="#eventModal">
+        New Event
+    </button>
+
+<!-- Modal -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">New Event</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm" method="post" action="{% url 'ecalendar:event_new' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 
 {{ calendar }}
+
+
 {% endblock %}
