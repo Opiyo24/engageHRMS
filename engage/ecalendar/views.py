@@ -1,17 +1,18 @@
 from datetime import datetime, timedelta, date
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.views import generic
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 import calendar
 
-from .models import *
+from accounts.models import Company
+from .models import Event
 from .utils import Calendar
 from .forms import EventForm
 
 def index(request):
-    return HttpResponse('hello')
+    return HttpResponse('hello Company, this is your calendar homepage')
 
 class CalendarView(generic.ListView):
     model = Event
@@ -30,21 +31,35 @@ class CalendarView(generic.ListView):
 def get_date(req_month):
     if req_month:
         year, month = (int(x) for x in req_month.split('-'))
-        return date(year, month, day=1)
-    return datetime.today()
+        return date(year, month, 1)
+    return datetime.today().replace(day=1)
 
 def prev_month(d):
     first = d.replace(day=1)
     prev_month = first - timedelta(days=1)
-    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month)
+    month = 'month=' + str(prev_month.year) + '-' + str(prev_month.month).zfill(2)
     return month
 
 def next_month(d):
     days_in_month = calendar.monthrange(d.year, d.month)[1]
     last = d.replace(day=days_in_month)
     next_month = last + timedelta(days=1)
-    month = 'month=' + str(next_month.year) + '-' + str(next_month.month)
+    month = 'month=' + str(next_month.year) + '-' + str(next_month.month).zfill(2)
     return month
+
+# def event(request, event_id=None):
+#     instance = Event()
+#     if event_id:
+#         instance = get_object_or_404(Event, pk=event_id)
+#     else:
+#         instance = Event()
+
+#     form = EventForm(request.POST or None, instance=instance)
+#     if request.POST and form.is_valid():
+#         form.save()
+#         return HttpResponseRedirect(reverse('ecalendar:calendar'))
+#     return render(request, 'ecalendar/event.html', {'form': form})
+
 
 def event(request, event_id=None):
     instance = Event()
@@ -56,5 +71,11 @@ def event(request, event_id=None):
     form = EventForm(request.POST or None, instance=instance)
     if request.POST and form.is_valid():
         form.save()
+        if request.is_ajax():
+            return JsonResponse({'message': 'Event created successfully!'})
         return HttpResponseRedirect(reverse('ecalendar:calendar'))
+    
+    if request.is_ajax():
+        return JsonResponse({'errors': form.errors}, status=400)
+    
     return render(request, 'ecalendar/event.html', {'form': form})
