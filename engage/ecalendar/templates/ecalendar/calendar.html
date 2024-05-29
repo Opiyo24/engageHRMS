@@ -1,4 +1,4 @@
-{% extends './base.html' %}
+{% extends 'accounts/base.html' %}
 
 {% block title %}
 Calendar
@@ -11,6 +11,9 @@ Calendar
     <button type="button" class="btn btn-info right" data-bs-toggle="modal" data-bs-target="#eventModal">
         New Event
     </button>
+</div>
+
+{{ calendar }}
 
 <!-- Modal -->
 <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
@@ -33,9 +36,35 @@ Calendar
         </div>
     </div>
 </div>
-</div>
 
-{{ calendar }}
+{% endblock %}
 
 
+{% block script %}
+<!-- Include Bootstrap 5 CSS and JS (you may already have these included) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5+5hb7TPXicbNf0dvgQ+Fi8cZ4xY5i6hu84lzT7R" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gyb5VykfT7E3iLOF7XB41I2Op8JMztJv5Q7fnDl2x7M06fDsum" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha384-pPskqnkWdaoc/2OAE+ZpDz5D5T4s4D2yYwq6ONP5v2Qe6Tsl5qV5IQTg5QW3KnFx" crossorigin="anonymous"></script>
+
+
+<script>
+    $(document).ready(function(){
+        $('#eventForm').on('submit', function(event){
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response){
+                    $('#eventModal').modal('hide');
+                    location.reload(); // Simple page reload to update the calendar view.
+                },
+                error: function(response){
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

@@ -26,7 +26,10 @@ class CalendarView(generic.ListView):
         context['calendar'] = mark_safe(html_cal)
         context['prev_month'] = prev_month(d)
         context['next_month'] = next_month(d)
+        context['form'] = EventForm()
+        
         return context
+    
 
 def get_date(req_month):
     if req_month:
@@ -62,20 +65,13 @@ def next_month(d):
 
 
 def event(request, event_id=None):
-    instance = Event()
-    if event_id:
-        instance = get_object_or_404(Event, pk=event_id)
-    else:
-        instance = Event()
+    instance = get_object_or_404(Event, pk=event_id) if event_id else Event()
 
     form = EventForm(request.POST or None, instance=instance)
-    if request.POST and form.is_valid():
+    if request.method == 'POST' and form.is_valid():
         form.save()
-        if request.is_ajax():
-            return JsonResponse({'message': 'Event created successfully!'})
+        if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+            return JsonResponse({'message': 'Event saved successfully!'})
         return HttpResponseRedirect(reverse('ecalendar:calendar'))
-    
-    if request.is_ajax():
-        return JsonResponse({'errors': form.errors}, status=400)
-    
+
     return render(request, 'ecalendar/event.html', {'form': form})
