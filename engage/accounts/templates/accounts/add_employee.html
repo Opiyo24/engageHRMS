@@ -5,37 +5,31 @@
 
 <h2>Add Employee</h2>
 
-<form method="post">
+<!-- Button to trigger modal -->
+<button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
+    Add Employee
+</button>
 
-	<button type="button" class="btn btn-warning mb-3" data-bs-toggle="modal" data-bs-target="#addEmployeeModal">
-            Add Employee
-	</button>
-
-        <!-- Modal -->
-	<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
-    	<div class="modal-dialog">
-            <div class="modal-content">
-            	<div class="modal-header">
-                	<h5 class="modal-title" id="addEmployeeModalLabel">
-						Add Employee
-					</h5>
-                	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-
-					</button>
-                </div>
-                <div class="modal-body">
-                	<form id="addEmployeeForm" method="post" action="{% url 'add_employee' %}">
-                    	{% csrf_token %}
-                    	{{ emp_form|crispy }}
-                    	<button type="submit" class="btn btn-primary">Submit</button>
-                	</form>
-                </div>
+<!-- Modal -->
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addEmployeeForm" method="post" action="{% url 'add_employee' %}">
+                    {% csrf_token %}
+                    {{ emp_form|crispy }}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
-</form>
+</div>
 
-  <div class="container mt-5 mx-0">
+<div class="container mt-5 mx-0">
     <h2 class="mb-4">Employee List</h2>
     <table class="table table-bordered table-striped">
         <thead>
@@ -64,7 +58,7 @@
                     <td>{{ employee.phone }}</td>
                     <td>{{ employee.address }}</td>
                     <td>{{ employee.position }}</td>
-                    <td>{{ employee.get_department_display }}</td>
+                    <td>{{ employee.department.name }}</td>
                     <td>{{ employee.get_contract_type_display }}</td>
                     <td>{{ employee.salary }}</td>
                     <td>{{ employee.start_date }}</td>

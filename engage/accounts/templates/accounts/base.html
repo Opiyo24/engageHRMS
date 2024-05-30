@@ -147,15 +147,34 @@
               url: $(this).attr('action'),
               data: $(this).serialize(),
               success: function(response) {
-                alert('Employee added successfully');
+                //alert('Employee added successfully');
                 $('#addEmployeeModal').modal('hide');
               },
               error: function(response) {
-                alert('Failed to add employee');
+                pass;
+                //alert('Failed to add employee');
               }
             });
           });
         });
+ 
+          $(document).ready(function(){
+              $('#eventForm').on('submit', function(event){
+                  event.preventDefault();
+                  $.ajax({
+                      type: 'POST',
+                      url: $(this).attr('action'),
+                      data: $(this).serialize(),
+                      success: function(response){
+                          $('#eventModal').modal('hide');
+                          location.reload(); // Simple page reload to update the calendar view.
+                      },
+                      error: function(response){
+                          alert('An error occurred. Please try again.');
+                      }
+                  });
+              });
+          });
       </script>
 
     {% bootstrap_javascript %}
