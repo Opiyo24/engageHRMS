@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 #import usercreation form
 from django.http import HttpResponse, HttpRequest
 from .forms import *
@@ -174,6 +174,7 @@ def add_title(request):
 def add_employee(request):
     context = {}
     employees = Employee.objects.filter(company=request.user.company)
+    comp = get_object_or_404(Company, pk=request.user.company.id)
     if request.method == 'POST':
         emp_form = EmployeeForm(request.POST)
         if emp_form.is_valid():
@@ -186,6 +187,7 @@ def add_employee(request):
     context = {
         'emp_form': EmployeeForm,
         'employees': employees,
+        'company_id': comp.id,
         }
     return render(request, 'accounts/add_employee.html', context)
 

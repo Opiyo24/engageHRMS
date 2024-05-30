@@ -92,9 +92,25 @@ class PositionForm(forms.ModelForm):
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
-        fields = ['title', 'first_name', 'last_name', 'email', 'phone', 'address', 'department', 'position', 'title', 'contract_type', 'start_date', 'end_date', 'salary']
+        fields = [
+            'title', 'first_name', 'last_name', 'email', 'phone', 'address',
+            'position', 'department', 'contract_type', 'salary', 'start_date',
+            'end_date'
+        ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date', 'max': datetime.date.today().isoformat()}),
             'end_date': forms.DateInput(attrs={'type': 'date', max: datetime.date.today().isoformat()}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(EmployeeForm, self).__init__(*args, **kwargs)
+        
+        if 'company' in self.data:
+            try:
+                company_id = int(self.data.get('company'))
+                self.fields['department'].queryset = Department.objects.filter(company_id=company_id).order_by('name')
+            except (ValueError, TypeError):
+                pass  # invalid input from the client; ignore and fallback to empty department queryset
+        elif self.instance.pk:
+            self.fields['department'].queryset = self.instance.company.department_set.order_by('name')
   
