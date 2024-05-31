@@ -41,7 +41,7 @@ class Contract_type(models.Model):
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.contract_type}"
+        return f"{self.name}"
     
 class Position(models.Model):
     name = models.CharField(max_length=100)
@@ -53,44 +53,16 @@ class Position(models.Model):
 
 
 class Employee(models.Model):
-    DEPARTMENTS = [
-        ('HR', 'Human Resources'),
-        ('FIN', 'Finance'),
-        ('IT', 'Information Technology'),
-        ('SALES', 'Sales'),
-        ('MARK', 'Marketing'),
-        ('PROD', 'Production'),
-        ('LOG', 'Logistics'),
-        ('ADM', 'Administration'),
-        ('MNG', 'Management'),
-    ]
-
-    CONTRACT_TYPE = [
-        ('FULL', 'Full Time'),
-        ('PART', 'Part Time'),
-        ('ATT', 'Attachment'),
-        ('CON', 'Contract'),
-        ('INT', 'Internship'),
-    ]
-
-    TITLES = [
-        ('Mr', 'Mr'),
-        ('Mrs', 'Mrs'),
-        ('Miss', 'Miss'),
-        ('Dr', 'Dr'),
-        ('Prof', 'Prof'),
-        ('Eng', 'Eng'),
-    ]
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, choices=TITLES, null=True)
+    title = models.ForeignKey(Title, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=100)
     address = models.CharField(max_length=100, null=True)
-    position = models.CharField(max_length=100)
+    position = models.ForeignKey(Position, on_delete=models.CASCADE)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    contract_type = models.CharField(max_length=100, choices=CONTRACT_TYPE, null=True)
+    contract_type = models.ForeignKey(Contract_type, on_delete=models.CASCADE)
     salary = models.DecimalField(max_digits=10, decimal_places=2)
     start_date = models.DateField()
     end_date = models.DateField(null=True)

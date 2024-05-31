@@ -184,8 +184,11 @@ def add_employee(request):
             messages.success(request, 'Employee added successfully')
         else:
             messages.error(request, 'Employee not added')
+    else:
+        emp_form = EmployeeForm()
+
     context = {
-        'emp_form': EmployeeForm,
+        'emp_form': emp_form,
         'employees': employees,
         'company_id': comp.id,
         }

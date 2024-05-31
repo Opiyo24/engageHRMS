@@ -109,8 +109,14 @@ class EmployeeForm(forms.ModelForm):
             try:
                 company_id = int(self.data.get('company'))
                 self.fields['department'].queryset = Department.objects.filter(company_id=company_id).order_by('name')
+                self.fields['title'].queryset = Title.objects.filter(company_id=company_id).order_by('name')
+                self.fields['position'].queryset = Position.objects.filter(company_id=company_id).order_by('name')
+                self.fields['contract_type'].queryset = Contract_type.objects.filter(company_id=company_id).order_by('name')
             except (ValueError, TypeError):
-                pass  # invalid input from the client; ignore and fallback to empty department queryset
+                pass  # invalid input from the client; ignore and fallback to empty queryset
         elif self.instance.pk:
             self.fields['department'].queryset = self.instance.company.department_set.order_by('name')
+            self.fields['title'].queryset = self.instance.company.title_set.order_by('name')
+            self.fields['position'].queryset = self.instance.company.position_set.order_by('name')
+            self.fields['contract_type'].queryset = self.instance.company.contract_type_set.order_by('name')
   
