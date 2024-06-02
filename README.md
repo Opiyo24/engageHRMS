@@ -8,14 +8,11 @@ Welcome to engageHRMS, a comprehensive Human Resource Management System built us
 - [Applications](#applications)
   - [Core](#core)
   - [Employee Management](#employee-management)
-  - [Attendance](#attendance)
-  - [Payroll](#payroll)
-  - [Performance](#performance)
-  - [Recruitment](#recruitment)
+  - [HR Calendar](#HRcalendar)
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Overview
 
