@@ -17,5 +17,6 @@ admin.site.register(Company, CompanyAdmin)
 admin.site.register(Department)
 admin.site.register(Title)
 admin.site.register(Contract_type)
-admin.site.register(Employee)
+admin.site.register(Position)
+admin.site.register(Employee, EmployeeAdmin)
 
