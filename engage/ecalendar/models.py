@@ -11,3 +11,20 @@ class Event(models.Model):
     def get_html_url(self):
         url = reverse('ecalendar:event_edit', args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
+    
+
+# class Shift(models.Model):
+#     pass
+
+#     @property
+#     def get_html_url(self):
+#         url = reverse('ecalendar:shift_edit', args=(self.id,))
+#         return f'<a href="{url}"> {self.title} </a>'
+    
+# class Times(models.Model):
+#     pass
+
+#     @property
+#     def get_html_url(self):
+#         url = reverse('ecalendar:times_edit', args=(self.id,))
+#         return f'<a href="{url}"> {self.title} </a>'
