@@ -1,0 +1,14 @@
+{% extends 'accounts/base.html' %}
+
+{% block content %}
+<div class="clearfix">
+    <span class="left m-2" style="font-size: 20px;">Wellcome, {{ request.user }}</span>
+    <a class="btn btn-info right" href="#"> Sign Out</a>
+	<a class="btn btn-info right mr-2" href="# "> Next Month >> </a>
+    <a class="btn btn-info right mr-2" href="#"> << Previous Month </a>
+    <a class="btn btn-info right mr-2" href="#"> + New Event </a>
+</div>
+<div style="color: blueviolet;">
+    {{ calendar }}
+</div>
+{% endblock %}
