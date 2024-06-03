@@ -50,19 +50,6 @@ def next_month(d):
     month = 'month=' + str(next_month.year) + '-' + str(next_month.month).zfill(2)
     return month
 
-# def event(request, event_id=None):
-#     instance = Event()
-#     if event_id:
-#         instance = get_object_or_404(Event, pk=event_id)
-#     else:
-#         instance = Event()
-
-#     form = EventForm(request.POST or None, instance=instance)
-#     if request.POST and form.is_valid():
-#         form.save()
-#         return HttpResponseRedirect(reverse('ecalendar:calendar'))
-#     return render(request, 'ecalendar/event.html', {'form': form})
-
 
 def event(request, event_id=None):
     instance = get_object_or_404(Event, pk=event_id) if event_id else Event()

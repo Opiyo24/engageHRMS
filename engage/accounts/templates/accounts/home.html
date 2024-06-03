@@ -4,5 +4,117 @@
 
 <h2>Hello {{ user.username }}, this is engage! Welcome.</h2>
 
+<!-- Hero Section -->
+<section class="hero" style="height: 800px">
+    <div class="container">
+      <h1 class="display-4">Welcome to HRMS</h1>
+      <p class="lead">Streamline Your HR Processes with Our Comprehensive Management System</p>
+      <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-5 bg-#6f42c1" style="height: 500px">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-lg-4">
+          <div class="mb-4">
+            <i class="features-icon bi bi-speedometer2"></i>
+          </div>
+          <h3>Efficient</h3>
+          <p>Automate and streamline your HR processes for maximum efficiency.</p>
+        </div>
+        <div class="col-lg-4">
+          <div class="mb-4">
+            <i class="features-icon bi bi-shield-lock"></i>
+          </div>
+          <h3>Secure</h3>
+          <p>Keep your data safe with our advanced security features.</p>
+        </div>
+        <div class="col-lg-4">
+          <div class="mb-4">
+            <i class="features-icon bi bi-bar-chart-line"></i>
+          </div>
+          <h3>Insightful</h3>
+          <p>Gain valuable insights from your HR data with our comprehensive analytics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 bg-#6f42c1" style="height: 500px">
+    <div class="container align-items-center">
+      <div class="row text-center">
+        <h2>Features</h2>
+        <div class="container ">
+            <h2>Employee Management</h2>
+            <p>Employee data creation and update the help you manage your employees with ease.</p>
+        </div>
+        <div class="container">
+            <h2>Event Management</h2>
+            <p>Create and conduct corporate events with the help of your virtual assistant and have all those details you need communivated aptly.</p>
+        </div>
+        <div class="container">
+            <h2 class="card-price">Duty Rosta</h2>
+            <p>Manage your workforce by assigning duties and assessing progress with ease.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="bg-light py-5" style="height: 500px">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2>Pricing</h2>
+        <p>Choose a plan that suits your needs.</p>
+      </div>
+      <div class="row text-center">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h3 class="card-title">Basic</h3>
+              <h4 class="card-price">$9.99<span class="period">/month</span></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+              </ul>
+              <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h3 class="card-title">Standard</h3>
+              <h4 class="card-price">$19.99<span class="period">/month</span></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+              </ul>
+              <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h3 class="card-title">Premium</h3>
+              <h4 class="card-price">$29.99<span class="period">/month</span></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Feature 1</li>
+                <li>Feature 2</li>
+                <li>Feature 3</li>
+              </ul>
+              <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include './footer.html' %}
 {% endblock %}
-{% include './footer.html' %}

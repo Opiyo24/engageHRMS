@@ -13,20 +13,6 @@ def home(request):
     context = {}
     return render(request, 'accounts/home.html', context)
 
-# def signup(request):
-#     if request.method == "GET":
-#         return render(request, 'accounts/signup.html', {'form': AccountCreationForm})
-#     else:
-#         if request.POST['password1'] == request.POST['password2']:
-#             try:
-#                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
-#                 user.save()
-#                 login(request, user)
-#                 return redirect('registration-index')
-#             except IntegrityError:
-#                 return render(request, 'accounts/signup.html', {'form': AccountCreationForm, 'error': 'That username has already been taken.'})
-#         else:
-#             return render(request, 'accounts/signup.html', {'form': AccountCreationForm, 'error': 'Passwords must match'})
         
 ##################### COMPANY #########################
 def company_creation(request):

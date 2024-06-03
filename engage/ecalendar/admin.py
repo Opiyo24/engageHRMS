@@ -6,3 +6,5 @@ from .models import Event
 
 # Register your models here.
 admin.site.register(Event)
+# admin.site.register(Shift)
+# admin.site.register(Times)
