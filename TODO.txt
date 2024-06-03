@@ -1,0 +1,7 @@
+1. Create path to dashboard from home page after authentication (navbar)
+2. Create functionalities for actions in employees, departments, etc lists
+3. Add status field to employee model
+4. Add employee id to employee model
+5. Implement leave systems - changes employee status
+6. Implement teh duty rosta
+7. Implement admin only decorator
