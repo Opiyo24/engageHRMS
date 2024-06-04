@@ -1,6 +1,6 @@
 # calendarapp/utils.py
 from calendar import HTMLCalendar
-from .models import Event
+from .models import Event, Shift
 
 
 class Calendar(HTMLCalendar):
