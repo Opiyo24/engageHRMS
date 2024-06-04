@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Event Dashboard" />
+        
+        
+        <!-- Open Graph Meta-->
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Engage Workforce dashboard" />
+        <meta property="og:title" content="Engage HRMS workforce" />
+        <meta property="og:url" content="https://Opiyo24.github.io/" />
+        <meta property="og:image" content="https://Opiyo24.github.io/images/me.jpg" />
+        <meta property="og:description" content="Workforce Dashboard" />
+        
+        <title>{% block title %}{% endblock title  %}</title>
+        
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+        
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+        
+        {% block extracss %}
+        {% endblock extracss %}
+    </head>
+    <body class="app sidebar-mini">
+    
+        <!-- Navbar-->
+        <header class="app-header">
+            <div class="navbar bg-primary">
+                {% if request.user.is_authenticated %}
+                    {% include 'accounts/auth_navbar.html' %}
+                {% else %}
+                    {% include 'accounts/navbar.html' %}
+                {% endif %}
+            </div>
+        </header>
+        
+        <!-- Sidebar menu-->
+        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <aside class="app-sidebar">
+            <div class="app-sidebar__user">
+                <img class="app-sidebar__user-avatar" src="https://sajib1066.github.io/images/me.jpg" alt="User Image" height="50px" width="50px"/>
+                <div>
+                    <p class="app-sidebar__user-name">{{ user.companyname }}</p>
+                    
+                </div>
+            </div>
+            <ul class="app-menu">
+                <li>
+                    <a class="app-menu__item active" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a>
+                </li>
+                <li>
+                    <a class="app-menu__item" href="{% url 'calendarapp:calendar' %}"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Calendar</span></a>
+                </li>
+                <li class="treeview">
+                    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Events</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a class="treeview-item" href="{% url 'calendarapp:running_events' %}"><i class="icon fa fa-circle-o"></i> Running</a>
+                        </li>
+                        <li>
+                            <a class="treeview-item" href="{% url 'calendarapp:running_events' %}"><i class="icon fa fa-circle-o"></i> Upcoming</a>
+                        </li>
+                        <li>
+                            <a class="treeview-item" href="{% url 'calendarapp:all_events' %}"><i class="icon fa fa-circle-o"></i> All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Docs</span></a>
+                </li>
+            </ul>
+        </aside>
+        
+        <main class="app-content">
+            <div class="app-title">
+                {% block breadcrumb %}
+                {% endblock breadcrumb %}
+            </div>
+            {% block content %}
+            {% endblock content %}
+        </main>
+        
+        <!-- Essential javascripts for application to work-->
+        {% include 'base/js.html' %}
+        {% block extrascripts %}
+        {% endblock extrascripts %}
+    </body>
+</html>

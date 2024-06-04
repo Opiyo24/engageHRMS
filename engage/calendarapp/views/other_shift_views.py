@@ -13,8 +13,8 @@ from django.shortcuts import get_object_or_404
 from calendarapp.models import Shift
 from calendarapp.forms import ShiftForm, AddShiftMemberForm
 from .other_views import get_date, prev_month, next_month
-from utils import Calendar
-from calendarapp.models import ShiftMember
+from calendarapp.utils import Calendar
+from calendarapp.models import ShiftMember, Shift
 
 
 class ShiftCalendarView(LoginRequiredMixin, generic.ListView):

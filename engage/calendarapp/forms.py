@@ -1,7 +1,6 @@
-from django.forms import ModelForm, DateInput
-from calendarapp.models import Event, EventMember
+from django.forms import ModelForm, DateInput, TimeInput
+from calendarapp.models import Event, EventMember, Shift, ShiftMember
 from django import forms
-
 
 class EventForm(ModelForm):
     class Meta:
@@ -39,4 +38,35 @@ class EventForm(ModelForm):
 class AddMemberForm(forms.ModelForm):
     class Meta:
         model = EventMember
+        fields = ["user"]
+
+
+class ShiftForm(ModelForm):
+    class Meta:
+        model = Shift
+        fields = ["title", "start_time", "end_time"]
+        widgets = {
+            "title": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Enter shift title"}
+            ),
+            "start_time": TimeInput(
+                attrs={"type": "time", "class": "form-control"},
+                format="%H:%M",
+            ),
+            "end_time": TimeInput(
+                attrs={"type": "time", "class": "form-control"},
+                format="%H:%M",
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ShiftForm, self).__init__(*args, **kwargs)
+        # input_formats to parse HTML5 time input to time field
+        self.fields["start_time"].input_formats = ("%H:%M",)
+        self.fields["end_time"].input_formats = ("%H:%M",)
+
+
+class AddShiftMemberForm(forms.ModelForm):
+    class Meta:
+        model = ShiftMember
         fields = ["user"]

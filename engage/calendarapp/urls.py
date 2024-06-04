@@ -1,9 +1,7 @@
 from django.urls import path
-
 from . import views
 
 app_name = "calendarapp"
-
 
 urlpatterns = [
     path("calender/", views.CalendarViewNew.as_view(), name="calendar"),
@@ -28,4 +26,22 @@ urlpatterns = [
         views.RunningEventsListView.as_view(),
         name="running_events",
     ),
+    path("shift/new/", views.create_shift, name="shift_new"),
+    path("shift/edit/<int:pk>/", views.ShiftEdit.as_view(), name="shift_edit"),
+    path("shift/<int:shift_id>/details/", views.shift_details, name="shift-detail"),
+    path(
+        "add_shiftemployee/<int:shift_id>", views.add_shiftmember, name="add_shiftemployee"
+    ),
+    path(
+        "shift/<int:pk>/remove",
+        views.ShiftMemberDeleteView.as_view(),
+        name="remove_shift",
+    ),
+    path("all-shift-list/", views.AllShiftsListView.as_view(), name="all_shifts"),
+    path(
+        "running-shift-list/",
+        views.RunningShiftsListView.as_view(),
+        name="running_shifts",
+    ),
+    path('delete_shift/<int:shift_id>/', views.delete_shift, name='delete_shift'),
 ]

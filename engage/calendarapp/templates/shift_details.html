@@ -1,0 +1,50 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}
+Shift Details
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="color: blueviolet">
+        <div class="clearfix">
+            <a class="btn btn-primary left" href="{% url 'calendarapp:shift_calendar' %}"> Shift Calendar </a>
+            <a class="btn btn-info right mr-2" href="{% url 'calendarapp:shift_edit' shift.pk %}"> Edit Shift </a>
+        </div>
+
+        <div class="clearfix">
+            <h3>Shift Name: {{ shift.title }}</h3>
+            <p>From <span style="color: gray;">{{ shift.start_time }}</span> To <span style="color: gray;">{{ shift.end_time }}</span></p>
+            <hr>
+            <p>{{ shift.description }}</p>
+        </div>
+        <hr>
+        <div class="clearfix">
+            <h4 class="left" > Employees of this Shift</h4>
+            <a class="btn btn-success right" href="{% url 'calendarapp:add_shiftemployee' shift.id %}"> Add Employee </a>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for employee in shiftemployee %}
+                <tr role="row">
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ employee.user.first_name }} {{ employee.user.last_name }}</td>
+                    <td>{{ employee.user.username }}</td>
+                    <td>{{ employee.user.email }}</td>
+                    <td>
+                        <a class="btn btn-danger" href="{% url 'calendarapp:remove_shift' employee.id %}">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+        </table>
+    </div>
+{% endblock %}
