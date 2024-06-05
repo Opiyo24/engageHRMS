@@ -23,11 +23,11 @@
   <div class="collapse navbar-collapse js-clone-nav justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav">
           <li class="nav-item">
-              <a class="nav-link active" href="{% url 'accounts-home' %}">Home</a>
+              <a class="nav-link active" href="{% url 'accounts:accounts-home' %}">Home</a>
       </ul>
       <div class="d2c_nav_btn d-none d-lg-block">
-          <a href="{% url 'company-login' %}" class="nav-link d-inline-block">Login</a>
-          <a href="{% url 'company-signup' %}" class="btn">Register</a>
+          <a href="{% url 'accounts:company-login' %}" class="nav-link d-inline-block">Login</a>
+          <a href="{% url 'accounts:company-signup' %}" class="btn">Register</a>
       </div>
   </div>
   <!-- Nav Item -->

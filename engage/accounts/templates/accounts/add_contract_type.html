@@ -20,7 +20,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form id="addContractTypeForm" method="post" action="{% url 'add_contract_type' %}">
+                <form id="addContractTypeForm" method="post" action="{% url 'accounts:add_contract_type' %}">
                   {% csrf_token %}
                   {{ contract_form|crispy }}
                   <button type="submit" class="btn btn-primary">Submit</button>

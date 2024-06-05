@@ -21,7 +21,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form id="addTitleForm" method="post" action="{% url 'add_title' %}">
+                  <form id="addTitleForm" method="post" action="{% url 'accounts:add_title' %}">
                     {% csrf_token %}
                     {{ title_form|crispy }}
                     <button type="submit" class="btn btn-primary">Submit</button>

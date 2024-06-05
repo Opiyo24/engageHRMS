@@ -69,7 +69,7 @@ def login_view(request):
             if user:
                 login(request, user)
                 messages.success(request, 'Welcome back!')
-                return redirect('company-logged')
+                return redirect('accounts:company-logged')
     else:
         form = LoginForm()
     return render(request, 'accounts/company_login.html', {'form': form})
