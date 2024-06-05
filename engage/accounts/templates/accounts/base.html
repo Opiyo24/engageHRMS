@@ -181,6 +181,17 @@
                   });
               });
           });
+
+            $(document).ready(function() {
+                $('.btn-danger').on('click', function(e) {
+                    e.preventDefault();
+                    var url = $(this).attr('href');
+                    var confirmDelete = confirm('Are you sure you want to delete this department?');
+                    if (confirmDelete) {
+                        window.location.href = url;
+                    }
+                });
+            });
       </script>
 
     {% bootstrap_javascript %}

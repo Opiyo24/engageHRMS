@@ -180,8 +180,22 @@ def add_employee(request):
         }
     return render(request, 'accounts/add_employee.html', context)
 
-def remove_dept(request):
-    return render(request, 'accounts/remove_dept.html')
+def delete_dept(request, pk):
+    department = Department.objects.get(pk=pk)
+    department.delete()
+    return redirect('accounts:add_dept')
+
+def edit_dept(request, pk):
+    department = Department.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = EditDeptForm(request.POST, instance=department)
+        if form.is_valid():
+            form.save()
+            return redirect('add_dept')
+    else:
+        form = EditDeptForm(instance=department)
+
+    return render(request, 'add_dept.html', {'edit_form': form})
 
 def remove_position(request):
     return render(request, 'accounts/remove_position.html')
