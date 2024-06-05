@@ -44,8 +44,8 @@
           <td>{{ pos.name }}</td>
           <td>{{ pos.abbreviation }}</td>
           <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#" class="btn btn-danger">Delete</a>
+              <a href="{% url 'accounts:edit_position' pos.pk %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'accounts:delete_position' pos.pk %}" class="btn btn-danger">Delete</a>
           </td>
       </tr>
       {% endfor %}

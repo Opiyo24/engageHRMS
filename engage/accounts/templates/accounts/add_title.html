@@ -5,31 +5,30 @@
 
 <h2>New Title</h2>
 
-<form method="POST">
-    <div class="container">
+<div class="container">
 
-        <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addTitleModal">
-            Add Title
-          </button>
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addTitleModal">
+        Add Title
+    </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="addTitleModal" tabindex="-1" aria-labelledby="addTitleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addTitleModalLabel">Add Title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form id="addTitleForm" method="post" action="{% url 'accounts:add_title' %}">
-                    {% csrf_token %}
-                    {{ title_form|crispy }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-              </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addTitleModal" tabindex="-1" aria-labelledby="addTitleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addTitleModalLabel">Add Title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addTitleForm" method="post" action="{% url 'accounts:add_title' %}">
+                {% csrf_token %}
+                {{ title_form|crispy }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
             </div>
           </div>
+        </div>
+      </div>
     </div>
 
 <h2>Copmany Titles</h2>
@@ -47,8 +46,8 @@
           <td>{{ title.name }}</td>
           <td>{{ title.abbreviation }}</td>
           <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#" class="btn btn-danger">Delete</a>
+              <a href="{% url 'accounts:edit_title' title.pk %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'accounts:delete_title' title.pk %}" class="btn btn-danger">Delete</a>
           </td>
       </tr>
       {% endfor %}

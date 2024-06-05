@@ -47,8 +47,8 @@
           <td>{{ contract.name }}</td>
           <td>{{ contract.abbreviation }}</td>
           <td>
-              <a href="#" class="btn btn-primary">Edit</a>
-              <a href="#" class="btn btn-danger">Delete</a>
+              <a href="{% url 'accounts:edit_contract_type' contract.pk %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'accounts:delete_contract_type' contract.pk %}" class="btn btn-danger">Delete</a>
           </td>
       </tr>
       {% endfor %}

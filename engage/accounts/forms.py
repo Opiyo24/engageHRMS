@@ -93,8 +93,7 @@ class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = [
-            'number', 'title', 'first_name', 'last_name', 'phone',
-            'position', 'department', 'contract_type', 'salary', 'status',
+            'number', 'title', 'first_name', 'last_name', 'email', 'phone', 'address', 'position', 'department', 'contract_type', 'salary', 'status', 'start_date', 'end_date', 'profile_picture',
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date', 'max': datetime.date.today().isoformat()}),

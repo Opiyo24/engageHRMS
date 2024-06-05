@@ -44,6 +44,7 @@
                 <th>Contract Type</th>
                 <th>Salary</th>
                 <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -59,6 +60,10 @@
                     <td>{{ employee.get_contract_type_display }}</td>
                     <td>{{ employee.salary }}</td>
                     <td>{{ employee.status }}</td>
+                    <td>
+                        <a href="{% url 'accounts:edit_employee' employee.pk %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'accounts:delete_employee' employee.pk %}" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

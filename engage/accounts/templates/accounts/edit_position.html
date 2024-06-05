@@ -1,0 +1,14 @@
+{% extends 'accounts/logged_in.html' %}
+{% load crispy_forms_tags %}
+
+{% block auth_content %}
+
+<h2>Edit Position</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-primary mb-3" type="submit">Update</button>
+</form>
+
+{% endblock %}
