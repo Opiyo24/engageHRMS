@@ -7,49 +7,40 @@
     <div class="row" style="height: calc(100vh - 56px);">
       <!-- Sidebar -->
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
-        <div class="position-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
-                Dashboard
-              </a>
+        <div class="position-sticky mb-5">
+          <div class="app-sidebar__user">
+            <img class="app-sidebar__user-avatar" src="#" alt="Company Logo" height="50px" width="50px"/>
+            <div>
+                <p class="app-sidebar__user-name">{{ user.companyname }}</p>
+                
+            </div>
+        </div>
+        <ul class="app-menu">
+            <li>
+                <a class="app-menu__item active mb-3" href="#"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'calendarapp:calendar' %}">
-                Calendar
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'calendarapp:calendar' %}"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Calendar</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:add_employee' %}">
-                Employees
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_employee' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Employees</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:add_dept' %}">
-                Departments
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_dept' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Departments</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:add_title' %}">
-                Titles
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_title' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Titles</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:add_position' %}">
-                Positions
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_position' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Positions</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:add_contract_type' %}">
-                Contract Types
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_contract_type' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Positions</span></a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:company_set_up' %}">
-                Company Profile
-              </a>
+            <li>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:company_set_up' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Company Profile</span></a>
             </li>
-          </ul>
+        </ul>
         </div>
       </nav>
 
