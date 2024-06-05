@@ -41,6 +41,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'ecalendar/css/styles.css' %}">
     <!-- Responsive CSS Link -->
     <link rel="stylesheet" href="{% static '/assets/css/responsive.css' %}">
+
+    <!-- Bootstrap links-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -93,6 +96,7 @@
     <script src="{% static 'lib/slick-1.8.1/slick/slick.min.js' %}"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
     <!-- Main JS Link -->
     <script src="{% static 'assets/js/main.js' %}"></script>
 
@@ -192,6 +196,26 @@
                     }
                 });
             });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var editButtons = document.querySelectorAll('.edit-dept-btn');
+            
+                editButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var deptId = button.getAttribute('data-id');
+                        var url = '{% url "accounts:edit_dept" 0 %}'.slice(0, -2) + deptId + '/';
+                        fetch(url)
+                            .then(response => response.text())
+                            .then(html => {
+                                var modalContent = document.querySelector('#edit-dept-modal .modal-content');
+                                modalContent.innerHTML = html;
+                                var editModal = new bootstrap.Modal(document.getElementById('edit-dept-modal'));
+                                editModal.show();
+                            });
+                    });
+                });
+            });
+              
       </script>
 
     {% bootstrap_javascript %}

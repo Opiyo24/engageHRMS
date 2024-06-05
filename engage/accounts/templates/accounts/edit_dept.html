@@ -1,7 +1,17 @@
-<h1>Edit Department</h1>
+{% extends 'accounts/logged_in.html' %}
+{% load crispy_forms_tags %}
+
+{% block auth_content %}
+
+<h2>Edit Department</h2>
 
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save</button>
+    {{ form|crispy }}
+    <button class="btn btn-primary mb-3" type="submit">Update</button>
 </form>
+
+<!-- <p>Department Name: {{ department.name }}</p>
+<p>Department Abbreviation: {{ department.abbreviation }}</p> -->
+
+{% endblock %}

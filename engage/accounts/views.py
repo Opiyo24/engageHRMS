@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 #import usercreation form
-from django.http import HttpResponse, HttpRequest
+from django.http import JsonResponse, HttpResponse, HttpRequest
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 from .models import *
 
 # Create your views here.
@@ -185,17 +188,29 @@ def delete_dept(request, pk):
     department.delete()
     return redirect('accounts:add_dept')
 
-def edit_dept(request, pk):
-    department = Department.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = EditDeptForm(request.POST, instance=department)
-        if form.is_valid():
-            form.save()
-            return redirect('add_dept')
-    else:
-        form = EditDeptForm(instance=department)
+class DepartmentUpdateView(UpdateView):
 
-    return render(request, 'add_dept.html', {'edit_form': form})
+    model = Department
+
+    form_class = DepartmentForm
+
+    template_name = 'accounts/edit_dept.html'
+
+    success_url = reverse_lazy('accounts:add_dept')
+
+
+    def form_valid(self, form):
+        department = form.save(commit=False)
+        department.company = self.request.user.company
+        department.save()
+        messages.success(self.request, 'Department updated successfully')
+        return super().form_valid(form)
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['department'] = self.object
+        return context
 
 def remove_position(request):
     return render(request, 'accounts/remove_position.html')

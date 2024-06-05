@@ -8,27 +8,26 @@
 <form method="post">
     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addDeptModal">
         Add Department
-      </button>
+    </button>
 
-        <!-- Modal -->
-        <div class="modal fade" id="addDeptModal" tabindex="-1" aria-labelledby="addDeptModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
+    <!-- Modal -->
+    <div class="modal fade" id="addDeptModal" tabindex="-1" aria-labelledby="addDeptModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addDeptModalLabel">Add Department</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="addDeptModalLabel">Add Department</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form id="addDeptForm" method="post">
-                    {% csrf_token %}
-                    {{ dept_form|crispy }}
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
+                    <form id="addDeptForm" method="post">
+                        {% csrf_token %}
+                        {{ dept_form|crispy }}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
+    </div>
 </form>
 
 <!-- Edit Department Modal -->
@@ -44,7 +43,7 @@
               <form method="post">
                   {% csrf_token %}
                   {{ dept_form|crispy }}
-                  <button type="submit">Save</button>
+                  <button type="submit">Update</button>
               </form>
           </div>
       </div>
@@ -66,11 +65,39 @@
             <td>{{ dept.name }}</td>
             <td>{{ dept.abbreviation }}</td>
             <td>
-                <a href="{% url 'accounts:edit_dept' dept.pk %}" class="btn btn-primary">Edit</a>
+              <a href="{% url 'accounts:edit_dept' dept.pk %}">
+                <button class="btn btn-primary edit-dept-btn">Edit</button>
+              </a>
                 <a href="{% url 'accounts:delete_dept' dept.pk %}" class="btn btn-danger">Delete</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
+</table>
+
+<!-- <script>
+document.addEventListener('DOMContentLoaded', function () {
+    var editButtons = document.querySelectorAll('.edit-dept-btn');
+
+    editButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var deptId = button.getAttribute('data-id');
+            var url = '{% url "accounts:edit_dept" 0 %}'.slice(0, -2) + deptId + '/';
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                var formContainer = document.getElementById('edit-dept-form-container');
+                formContainer.innerHTML = data.form;
+                var editModal = new bootstrap.Modal(document.getElementById('edit-dept-modal'));
+                editModal.show();
+            });
+        });
+    });
+});
+</script> -->
 
 {% endblock %}
