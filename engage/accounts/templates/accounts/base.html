@@ -64,11 +64,16 @@
     </header>
     <!-- Header End -->
 
-    {% block base %}
-    {% endblock %}
-    {% block content %}
+    <body>
+      <div style="height: calc(100vh - 56px); overflow-y: auto;"" >
+        {% block base %}
+        {% endblock %}
+        {% block content %}
+    
+        {% endblock %}
 
-    {% endblock %}
+      </div>
+    </body>
 
     
     
