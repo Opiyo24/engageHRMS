@@ -53,6 +53,10 @@ class Position(models.Model):
 
 
 class Employee(models.Model):
+    STATUS = [
+        ('Active', 'Active'),
+        ('Leave', 'Leave')
+    ]
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.ForeignKey(Title, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
@@ -67,6 +71,7 @@ class Employee(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(null=True)
     profile_picture = models.ImageField(upload_to='profile_picture', default='default.jpg')
+    status = models.CharField(max_length=100, choices=STATUS, default='Active')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)

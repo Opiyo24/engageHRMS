@@ -201,7 +201,7 @@ def logged(request):
 
 
 def dashboard(request):
-    return render(request, 'accounts/profile_base.html')
+    return render(request, 'accounts/accounts_dashboard.html')
 
 def calendar(request):
     return render(request, 'accounts/calendar.html')
