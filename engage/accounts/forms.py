@@ -93,9 +93,7 @@ class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = [
-            'title', 'first_name', 'last_name', 'email', 'phone', 'address',
-            'position', 'department', 'contract_type', 'salary', 'start_date',
-            'end_date'
+            'number', 'title', 'first_name', 'last_name', 'email', 'phone', 'address', 'position', 'department', 'contract_type', 'salary', 'status', 'start_date', 'end_date', 'profile_picture',
         ]
         widgets = {
             'start_date': forms.DateInput(attrs={'type': 'date', 'max': datetime.date.today().isoformat()}),
@@ -119,4 +117,9 @@ class EmployeeForm(forms.ModelForm):
             self.fields['title'].queryset = self.instance.company.title_set.order_by('name')
             self.fields['position'].queryset = self.instance.company.position_set.order_by('name')
             self.fields['contract_type'].queryset = self.instance.company.contract_type_set.order_by('name')
+
+class EditDeptForm(forms.ModelForm):
+    class Meta:
+        model = Department
+        fields = ['name', 'abbreviation']
   

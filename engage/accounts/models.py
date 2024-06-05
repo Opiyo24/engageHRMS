@@ -58,6 +58,7 @@ class Employee(models.Model):
         ('Leave', 'Leave')
     ]
     # user = models.OneToOneField(User, on_delete=models.CASCADE)
+    number = models.CharField(max_length=100, unique=True)
     title = models.ForeignKey(Title, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)

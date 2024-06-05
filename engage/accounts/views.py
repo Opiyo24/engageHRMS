@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
 #import usercreation form
-from django.http import HttpResponse, HttpRequest
+from django.http import JsonResponse, HttpResponse, HttpRequest
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib import messages
+from django.template.loader import render_to_string
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
 from .models import *
 
 # Create your views here.
@@ -180,20 +183,50 @@ def add_employee(request):
         }
     return render(request, 'accounts/add_employee.html', context)
 
-def remove_dept(request):
-    return render(request, 'accounts/remove_dept.html')
+def delete_dept(request, pk):
+    department = Department.objects.get(pk=pk)
+    department.delete()
+    return redirect('accounts:add_dept')
 
-def remove_position(request):
-    return render(request, 'accounts/remove_position.html')
+class DepartmentUpdateView(UpdateView):
+    model = Department
+    form_class = DepartmentForm
+    template_name = 'accounts/edit_dept.html'
+    success_url = reverse_lazy('accounts:add_dept')
 
-def remove_contract_type(request):
-    return render(request, 'accounts/remove_contract_type.html')
+    def form_valid(self, form):
+        department = form.save(commit=False)
+        department.company = self.request.user.company
+        department.save()
+        messages.success(self.request, 'Department updated successfully')
+        return super().form_valid(form)
 
-def employees(request):
-    return render(request, 'accounts/employees.html')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['department'] = self.object
+        return context
 
-def remove_employee(request):
-    return render(request, 'accounts/remove_employee.html')
+def delete_position(request, pk):
+    position = Position.objects.get(pk=pk)
+    position.delete()
+    return redirect('accounts:add_position')
+
+
+def delete_contract_type(request, pk):
+    contract_type = Contract_type.objects.get(pk=pk)
+    contract_type.delete()
+    return redirect('accounts:add_contract_type')
+
+def delete_title(request, pk):
+    title = Title.objects.get(pk=pk)
+    title.delete()
+    return redirect('accounts:add_title')
+
+
+def delete_employee(request, pk):
+    employee = Employee.objects.get(pk=pk)
+    employee.delete()
+    return redirect('accounts:add_employee')
 
 
 def logged(request):
@@ -206,11 +239,77 @@ def dashboard(request):
 def calendar(request):
     return render(request, 'accounts/calendar.html')
 
-def add_activity(request):
-    return render(request, 'accounts/add_activity.html')
+class TitleUpdateView(UpdateView):
+    model = Title
+    form_class = TitleForm
+    template_name = 'accounts/edit_title.html'
+    success_url = reverse_lazy('accounts:add_title')
 
-def activities(request):
-    return render(request, 'accounts/activities.html')
+    def form_valid(self, form):
+        title = form.save(commit=False)
+        title.company = self.request.user.company
+        title.save()
+        messages.success(self.request, 'Title updated successfully')
+        return super().form_valid(form)
 
-def remove_activity(request):
-    return render(request, 'accounts/remove_activity.html')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = self.object
+        return context
+
+
+class ContractTypeUpdateView(UpdateView):
+    model = Contract_type
+    form_class = ContractForm
+    template_name = 'accounts/edit_contract_type.html'
+    success_url = reverse_lazy('accounts:add_contract_type')
+
+    def form_valid(self, form):
+        contract_type = form.save(commit=False)
+        contract_type.company = self.request.user.company
+        contract_type.save()
+        messages.success(self.request, 'Contract type updated successfully')
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contract_type'] = self.object
+        return context
+
+
+class PositionUpdateView(UpdateView):
+    model = Position
+    form_class = PositionForm
+    template_name = 'accounts/edit_position.html'
+    success_url = reverse_lazy('accounts:add_position')
+
+    def form_valid(self, form):
+        position = form.save(commit=False)
+        position.company = self.request.user.company
+        position.save()
+        messages.success(self.request, 'Position updated successfully')
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['position'] = self.object
+        return context
+
+
+class EmployeeUpdateView(UpdateView):
+    model = Employee
+    form_class = EmployeeForm
+    template_name = 'accounts/edit_employee.html'
+    success_url = reverse_lazy('accounts:add_employee')
+
+    def form_valid(self, form):
+        employee = form.save(commit=False)
+        employee.company = self.request.user.company
+        employee.save()
+        messages.success(self.request, 'Employee updated successfully')
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['employee'] = self.object
+        return context

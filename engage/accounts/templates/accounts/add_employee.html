@@ -34,35 +34,36 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Title</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Email</th>
                 <th>Phone</th>
-                <th>Address</th>
                 <th>Position</th>
                 <th>Department</th>
                 <th>Contract Type</th>
                 <th>Salary</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for employee in employees %}
                 <tr>
+                    <td>{{ employee.number }}</td>
                     <td>{{ employee.title }}</td>
                     <td>{{ employee.first_name }}</td>
                     <td>{{ employee.last_name }}</td>
-                    <td>{{ employee.email }}</td>
                     <td>{{ employee.phone }}</td>
-                    <td>{{ employee.address }}</td>
                     <td>{{ employee.position }}</td>
                     <td>{{ employee.department.name }}</td>
                     <td>{{ employee.get_contract_type_display }}</td>
                     <td>{{ employee.salary }}</td>
-                    <td>{{ employee.start_date }}</td>
-                    <td>{{ employee.end_date }}</td>
+                    <td>{{ employee.status }}</td>
+                    <td>
+                        <a href="{% url 'accounts:edit_employee' employee.pk %}" class="btn btn-primary">Edit</a>
+                        <a href="{% url 'accounts:delete_employee' employee.pk %}" class="btn btn-danger">Delete</a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
