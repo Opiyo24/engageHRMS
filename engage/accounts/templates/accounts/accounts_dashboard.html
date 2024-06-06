@@ -66,6 +66,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 417.312px;">Name</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 189.281px;">Department</th>
                                             <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Status</th>
+                                            <th class="sorting" tabindex="0" aria-controls="sampleTable" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 102.141px;">Shift</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -75,6 +76,7 @@
                                                 <td>{{ employee.first_name }} {{ employee.last_name }}</td>
                                                 <td> {{ employee.department }} </td>
                                                 <td> {{ employee.status }}</td>
+                                                <td> {{ employee.shift }}</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
