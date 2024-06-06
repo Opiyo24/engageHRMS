@@ -51,13 +51,13 @@
             {% for employee in employees %}
                 <tr>
                     <td>{{ employee.number }}</td>
-                    <td>{{ employee.title }}</td>
+                    <td>{{ employee.title.abbreviation }}</td>
                     <td>{{ employee.first_name }}</td>
                     <td>{{ employee.last_name }}</td>
                     <td>{{ employee.phone }}</td>
                     <td>{{ employee.position }}</td>
                     <td>{{ employee.department.name }}</td>
-                    <td>{{ employee.get_contract_type_display }}</td>
+                    <td>{{ employee.contract_type }}</td>
                     <td>{{ employee.salary }}</td>
                     <td>{{ employee.status }}</td>
                     <td>

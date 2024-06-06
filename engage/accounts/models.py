@@ -73,6 +73,7 @@ class Employee(models.Model):
     end_date = models.DateField(null=True)
     profile_picture = models.ImageField(upload_to='profile_picture', default='default.jpg')
     status = models.CharField(max_length=100, choices=STATUS, default='Active')
+    shift = models.CharField(max_length=100, default='TBD')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)

@@ -9,7 +9,7 @@
       <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
         <div class="position-sticky mb-5">
           <div class="app-sidebar__user">
-            <img class="app-sidebar__user-avatar" src="#" alt="Company Logo" height="50px" width="50px"/>
+            <img class="app-sidebar__user-avatar" src="/../Images/logo.png" alt="Company Logo" height="50px" width="50px"/>
             <div>
                 <p class="app-sidebar__user-name">{{ user.companyname }}</p>
                 
@@ -17,28 +17,28 @@
         </div>
         <ul class="app-menu">
             <li>
-                <a class="app-menu__item active mb-3" href="{% url 'accounts:dashboard' %}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a>
+                <a class="app-menu__item active mb-3" href="{% url 'accounts:dashboard' %}"><i class="app-menu__icon bi bi-speedometer2"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'calendarapp:calendar' %}"><i class="app-menu__icon fa fa-calendar"></i><span class="app-menu__label">Calendar</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'calendarapp:calendar' %}"><i class="app-menu__icon bi bi-calendar"></i><span class="app-menu__label">Calendar</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'accounts:add_employee' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Employees</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_employee' %}"><i class="app-menu__icon bi bi-person-plus"></i><span class="app-menu__label">Employees</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'accounts:add_dept' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Departments</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_dept' %}"><i class="app-menu__icon bi bi-people-fill"></i><span class="app-menu__label">Departments</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'accounts:add_title' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Titles</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_title' %}"><i class="app-menu__icon bi bi-file-earmark-code"></i><span class="app-menu__label">Titles</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'accounts:add_position' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Positions</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_position' %}"><i class="app-menu__icon bi bi-building"></i><span class="app-menu__label">Positions</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'accounts:add_contract_type' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Contract Type</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:add_contract_type' %}"><i class="app-menu__icon bi bi-file-earmark-text"></i><span class="app-menu__label">Contract Type</span></a>
             </li>
             <li>
-                <a class="app-menu__item mb-3" href="{% url 'accounts:company_set_up' %}"><i class="app-menu__icon fa fa-file-code-o"></i><span class="app-menu__label">Company Profile</span></a>
+                <a class="app-menu__item mb-3" href="{% url 'accounts:company_set_up' %}"><i class="app-menu__icon bi bi-building"></i><span class="app-menu__label">Company Profile</span></a>
             </li>
         </ul>
         </div>

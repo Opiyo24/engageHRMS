@@ -84,24 +84,32 @@ class EventEdit(generic.UpdateView):
 def event_details(request, event_id):
     event = Event.objects.get(id=event_id)
     eventmember = EventMember.objects.filter(event=event)
+    
     context = {"event": event, "eventmember": eventmember}
     return render(request, "event-details.html", context)
 
 
 def add_eventmember(request, event_id):
     forms = AddMemberForm()
+    event = Event.objects.get(id=event_id)
+    eventmember = EventMember.objects.filter(event=event)
     if request.method == "POST":
         forms = AddMemberForm(request.POST)
         if forms.is_valid():
-            member = EventMember.objects.filter(event=event_id)
-            event = Event.objects.get(id=event_id)
-            if member.count() <= 9:
-                user = forms.cleaned_data["user"]
-                EventMember.objects.create(event=event, user=user)
+            user = forms.cleaned_data["user"]
+            if not EventMember.objects.filter(event=event, user=user).exists():
+                new_eventmember = EventMember.objects.create(event=event, user=user)
+                if event.title == 'Morning Shift' or event.title == 'Morning':
+                    user.shift = 'Morning'
+                elif event.title == 'Afternoon Shift' or event.title == 'Afternoon':
+                    user.shift = 'Afternoon'
+                else:
+                    user.shift = 'Night'
+                user.save()  # Save the updated Employee object
                 return redirect("calendarapp:calendar")
             else:
-                print("--------------User limit exceed!-----------------")
-    context = {"form": forms}
+                print("User is already a member of this event.")
+    context = {"form": forms, "eventmember": eventmember}
     return render(request, "add_member.html", context)
 
 
