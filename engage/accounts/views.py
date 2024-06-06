@@ -234,7 +234,20 @@ def logged(request):
 
 
 def dashboard(request):
-    return render(request, 'accounts/accounts_dashboard.html')
+    deptn = Department.objects.filter(company=request.user.company).count()
+    empn = Employee.objects.filter(company=request.user.company).count()
+    name = request.user.company.name
+    logo = request.user.company.logo
+    employees = Employee.objects.filter(company=request.user.company)
+
+    context = {
+        'deptn': deptn,
+        'empn': empn,
+        'name': name,
+        'logo': logo,
+        'employees': employees,
+    }
+    return render(request, 'accounts/accounts_dashboard.html', context)
 
 def calendar(request):
     return render(request, 'accounts/calendar.html')

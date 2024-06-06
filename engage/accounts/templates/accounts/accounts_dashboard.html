@@ -20,17 +20,17 @@
         <div class="widget-small primary coloured-icon">
             <i class="icon fa fa-files-o fa-3x"></i>
             <div class="info">
-                <h4>company_name</h4>
-                <p><b>company logo</b></p>
+                <h4>{{ name }}</h4>
+                <p><b>{{ logo }}</b></p>
             </div>
         </div>
     </div>
     <div class="col-md-6 col-lg-3">
         <div class="widget-small info coloured-icon">
-            <i class="icon fa fa-thumbs-o-up fa-3x"></i>
+            <i class="icon bi bi-thumbs-up-fill fa-3x"></i>
             <div class="info">
                 <h4>Departments</h4>
-                <p><b>##</b></p>
+                <p><b>{{ deptn }}</b></p>
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
             <i class="icon fa fa-users fa-3x"></i>
             <div class="info">
                 <h4>Employees</h4>
-                <p><b>10</b></p>
+                <p><b>{{ empn }}</b></p>
             </div>
         </div>
     </div>
@@ -69,12 +69,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {% for event in latest_events %}
+                                        {% for employee in employees %}
                                             <tr role="row" class="odd">
-                                                <td class="sorting_1">employee_id</td>
-                                                <td>employee_name</td>
-                                                <td> employee_department </td>
-                                                <td> employee_status</td>
+                                                <td class="sorting_1">{{ employee.number }}</td>
+                                                <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+                                                <td> {{ employee.department }} </td>
+                                                <td> {{ employee.status }}</td>
                                             </tr>
                                         {% endfor %}
                                     </tbody>
