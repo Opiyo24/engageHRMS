@@ -30,21 +30,23 @@
         {% block extracss %}
         {% endblock extracss %}
     </head>
-    <body class="app sidebar-mini" style="color: blueviolet">
-    
+    <body >
         <!-- Navbar-->
-        <header class="app-header">
-            <div class="navbar bg-primary">
-                {% if request.user.is_authenticated %}
-                    {% include 'accounts/auth_navbar.html' %}
-                {% else %}
-                    {% include 'accounts/navbar.html' %}
-                {% endif %}
-            </div>
-        </header>
+        <div class="">
+            <header class="app-header">
+                <div class="navbar bg-primary">
+                    {% if request.user.is_authenticated %}
+                        {% include 'accounts/auth_navbar.html' %}
+                    {% else %}
+                        {% include 'accounts/navbar.html' %}
+                    {% endif %}
+                </div>
+            </header>
+        </div>
         
         <!-- Sidebar menu-->
-        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+        <div class="app sidebar-mini" style="color: blueviolet">
+            <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
         <aside class="app-sidebar">
             <div class="app-sidebar__user">
                 <img class="app-sidebar__user-avatar" src="https://sajib1066.github.io/images/me.jpg" alt="User Image" height="50px" width="50px"/>
@@ -81,13 +83,10 @@
         </aside>
         
         <main class="app-content">
-            <div class="app-title">
-                {% block breadcrumb %}
-                {% endblock breadcrumb %}
-            </div>
             {% block content %}
             {% endblock content %}
         </main>
+        </div>
         
         <!-- Essential javascripts for application to work-->
         {% include 'base/js.html' %}
