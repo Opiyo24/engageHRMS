@@ -8,7 +8,11 @@
     <div class="container">
       <h1 class="display-4">Welcome to engageHRMS</h1>
       <p class="lead">Streamline Your HR Processes with Our Comprehensive Management System</p>
-      <a href="#" class="btn btn-primary btn-lg">Get Started</a>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'accounts:dashboard' %}" class="btn btn-primary btn-lg">Dashboard</a>
+      {% else %}
+        <a href="{% url 'accounts:company-signup' %}" class="btn btn-primary btn-lg">Get Started</a>
+      {% endif %}
     </div>
   </section>
 

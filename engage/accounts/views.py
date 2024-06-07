@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-#import usercreation form
 from django.http import JsonResponse, HttpResponse, HttpRequest
 from .forms import *
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -39,24 +39,21 @@ def company_creation(request):
     
     return render(request, 'accounts/company_signup.html', {'company_form': company_form})
 
-
+@login_required
 def company_set_up_intro(request):
     return render(request, 'accounts/set_up_intro.html')
 
+@login_required
 def company_set_up(request):
     company = request.user.company
     if request.method == 'POST':
         set_up_form = CompanySetUpForm(request.POST, instance=company)
-
         if set_up_form.is_valid():
             set_up_form.save()
-
             messages.success(request, 'Profile updated successfully')
-            return render(request, 'accounts/logged_in.html')  # Redirect to a specific view after successful submission
+            return render(request, 'accounts/logged_in.html')
     else:
         set_up_form = CompanySetUpForm()
-
-
     context = {
         'set_up_form': set_up_form,
     }
@@ -77,14 +74,15 @@ def login_view(request):
         form = LoginForm()
     return render(request, 'accounts/company_login.html', {'form': form})
 
-
+@login_required
 def logout_view(request):
     form = LoginForm()
     logout(request)
-    return render(request, 'accounts/company_login.html', {'form': form})
+    return redirect('accounts:accounts-home')
 
 
 ######################## DEPARTMENT ############################
+@login_required
 def add_dept(request):
     context = {}
     departments = Department.objects.filter(company=request.user.company)
@@ -103,6 +101,7 @@ def add_dept(request):
         }
     return render(request, 'accounts/add_dept.html', context)
 
+@login_required
 def add_position(request):
     context = {}
     positions = Position.objects.filter(company=request.user.company)
@@ -121,6 +120,7 @@ def add_position(request):
         }
     return render(request, 'accounts/add_position.html', context)
 
+@login_required
 def add_contract_type(request):
     context = {}
     contracts = Contract_type.objects.filter(company=request.user.company)
@@ -142,6 +142,7 @@ def add_contract_type(request):
         }   
     return render(request, 'accounts/add_contract_type.html', context)
 
+@login_required
 def add_title(request):
     context = {}
     titles = Title.objects.filter(company=request.user.company)
@@ -160,6 +161,7 @@ def add_title(request):
         }
     return render(request, 'accounts/add_title.html', context)
 
+@login_required
 def add_employee(request):
     context = {}
     employees = Employee.objects.filter(company=request.user.company)
@@ -183,10 +185,12 @@ def add_employee(request):
         }
     return render(request, 'accounts/add_employee.html', context)
 
+@login_required
 def delete_dept(request, pk):
     department = Department.objects.get(pk=pk)
     department.delete()
     return redirect('accounts:add_dept')
+
 
 class DepartmentUpdateView(UpdateView):
     model = Department
@@ -206,33 +210,35 @@ class DepartmentUpdateView(UpdateView):
         context['department'] = self.object
         return context
 
+@login_required
 def delete_position(request, pk):
     position = Position.objects.get(pk=pk)
     position.delete()
     return redirect('accounts:add_position')
 
-
+@login_required
 def delete_contract_type(request, pk):
     contract_type = Contract_type.objects.get(pk=pk)
     contract_type.delete()
     return redirect('accounts:add_contract_type')
 
+@login_required
 def delete_title(request, pk):
     title = Title.objects.get(pk=pk)
     title.delete()
     return redirect('accounts:add_title')
 
-
+@login_required
 def delete_employee(request, pk):
     employee = Employee.objects.get(pk=pk)
     employee.delete()
     return redirect('accounts:add_employee')
 
-
+@login_required
 def logged(request):
     return render(request, 'accounts/logged_in.html')
 
-
+@login_required
 def dashboard(request):
     deptn = Department.objects.filter(company=request.user.company).count()
     empn = Employee.objects.filter(company=request.user.company).count()
@@ -249,8 +255,10 @@ def dashboard(request):
     }
     return render(request, 'accounts/accounts_dashboard.html', context)
 
+@login_required
 def calendar(request):
     return render(request, 'accounts/calendar.html')
+
 
 class TitleUpdateView(UpdateView):
     model = Title
