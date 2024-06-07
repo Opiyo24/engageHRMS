@@ -4,11 +4,17 @@ from .models import *
 
 
 class CompanyAdmin(admin.ModelAdmin):
+    """
+    Admin class for Company model
+    """
     list_display = ('name', 'email', 'phone', 'website')
     search_fields = ('name', 'email')
     list_filter = ('name',)
 
 class EmployeeAdmin(admin.ModelAdmin):
+    """
+    Admin class for Employee model
+    """
     list_display = ('first_name', 'last_name', 'email', 'phone', 'department', 'title', 'contract_type')
     search_fields = ('first_name', 'last_name', 'email')
     list_filter = ('department', 'title', 'contract_type')

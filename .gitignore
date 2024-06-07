@@ -1,0 +1,15 @@
+#virtual environment (hrms)
+hrms/
+
+# Ignore the database file
+db.sqlite3
+
+# Ignore the text file
+TODO.txt
+presentation.txt
+
+# Ignore all __pycache__ directories and their contents
+__pycache__/
+
+# Ignore all.pyc files
+*.pyc
