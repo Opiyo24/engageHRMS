@@ -5,23 +5,12 @@ from django import forms
 from .models import *
 import datetime
 
-# class UserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = '__all__' 
-
-# class AccountCreationForm(UserCreationForm):
-#     def __init__(self, *args, **kwargs):
-#         super(AccountCreationForm, self).__init__(*args, **kwargs)
-
-#         for fieldname in ['username', 'password1', 'password2']:
-#             self.fields[fieldname].help_text = None
-#             self.fields[fieldname].widget.attrs.update({'class': 'form-control'})
 
 
 class CompanyRegistrationForm(UserCreationForm):
-    # name = forms.CharField(max_length=255)
-    # password = forms.CharField(max_length=255)
+    """
+    Form for registering a company.
+    """
 
     class Meta:
         model = User
@@ -32,6 +21,9 @@ class CompanyRegistrationForm(UserCreationForm):
         }
 
     def save(self, commit=True):
+        """
+        Save the company and user.
+        """
         user = super(CompanyRegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
         user.is_staff = True
@@ -45,6 +37,9 @@ class CompanyRegistrationForm(UserCreationForm):
         return user
     
 class LoginForm(forms.Form):
+    """
+    Form for logging in a user.
+    """
     username = forms.CharField(max_length=255)
     password = forms.CharField(max_length=255, widget=forms.PasswordInput)
 
@@ -59,37 +54,50 @@ class LoginForm(forms.Form):
 
 
 class CompanySetUpForm(forms.ModelForm):
+    """
+    Form for setting up a company."""
     class Meta:
         model = Company
         fields = ['address', 'email', 'phone', 'website', 'logo']
 
-# class CompanyLoginForm(forms.ModelForm):
-#     class Meta:
-#         model = Company
-#         fields = ['name', 'password']
 
 class DepartmentForm(forms.ModelForm):
+    """
+    Form for creating a department.
+    """
     class Meta:
         model = Department
         fields = ['name', 'abbreviation']
 
 
 class TitleForm(forms.ModelForm):
+    """
+    Form for creating a title.
+    """
     class Meta:
         model = Title
         fields = ['name', 'abbreviation']
 
 class ContractForm(forms.ModelForm):
+    """
+    Form for creating a contract type.
+    """
     class Meta:
         model = Contract_type
         fields = ['name', 'abbreviation']
 
 class PositionForm(forms.ModelForm):
+    """
+    Form for creating a position.
+    """
     class Meta:
         model = Position
         fields = ['name', 'abbreviation']
 
 class EmployeeForm(forms.ModelForm):
+    """
+    Form for creating an employee.
+    """
     class Meta:
         model = Employee
         fields = [
@@ -119,6 +127,9 @@ class EmployeeForm(forms.ModelForm):
             self.fields['contract_type'].queryset = self.instance.company.contract_type_set.order_by('name')
 
 class EditDeptForm(forms.ModelForm):
+    """
+    Form for editing a department.
+    """
     class Meta:
         model = Department
         fields = ['name', 'abbreviation']

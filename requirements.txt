@@ -1,3 +1,6 @@
 python
 django
 pillow
+pytest
+pytest-mock
+pytest-django

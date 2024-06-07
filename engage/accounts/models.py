@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 #     id = models.AutoField(primary_key=True)
 
 class Company(models.Model):
+    """
+    Model for a company.
+    """
     name = models.CharField(max_length=100)
     owner = models.OneToOneField(User, on_delete=models.CASCADE, related_name='company')
     password = models.CharField(max_length=100)
@@ -20,6 +23,9 @@ class Company(models.Model):
         return f"{self.name}"
     
 class Department(models.Model):
+    """
+    Model for a department.
+    """
     name = models.CharField(max_length=100)
     abbreviation = models.CharField(max_length=100, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -28,6 +34,9 @@ class Department(models.Model):
         return f"{self.name}"
     
 class Title(models.Model):
+    """
+    Model for a title.
+    """
     name = models.CharField(max_length=100)
     abbreviation = models.CharField(max_length=100, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -36,6 +45,9 @@ class Title(models.Model):
         return f"{self.name}"
     
 class Contract_type(models.Model):
+    """
+    Model for a contract type.
+    """
     name = models.CharField(max_length=100)
     abbreviation = models.CharField(max_length=100, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -44,6 +56,9 @@ class Contract_type(models.Model):
         return f"{self.name}"
     
 class Position(models.Model):
+    """
+    Model for a position.
+    """
     name = models.CharField(max_length=100)
     abbreviation = models.CharField(max_length=100, null=True)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -53,6 +68,9 @@ class Position(models.Model):
 
 
 class Employee(models.Model):
+    """
+    Model for an employee.
+    """
     STATUS = [
         ('Active', 'Active'),
         ('Leave', 'Leave')
